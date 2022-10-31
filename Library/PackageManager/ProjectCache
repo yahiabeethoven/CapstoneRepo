@@ -34,7 +34,7 @@ m_PackageAssets:
         email: 
         url: 
       category: Editor
-      type: 
+      type: asset
       description: The Version Control package gives you the ability to use either
         Collaborate or Plastic SCM for Unity (beta) in the Unity editor. To use Plastic
         SCM for Unity (beta), a Plastic SCM subscription is required. Learn more
@@ -79,6 +79,7 @@ m_PackageAssets:
         - 1.14.15
         - 1.14.16
         - 1.14.17
+        - 1.14.18
         - 1.15.1
         - 1.15.4
         - 1.15.7
@@ -88,6 +89,11 @@ m_PackageAssets:
         - 1.15.15
         - 1.15.16
         - 1.15.17
+        - 1.15.18
+        - 1.17.0
+        - 1.17.1
+        - 1.17.2
+        - 1.17.6
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -104,6 +110,11 @@ m_PackageAssets:
         - 1.15.15
         - 1.15.16
         - 1.15.17
+        - 1.15.18
+        - 1.17.0
+        - 1.17.1
+        - 1.17.2
+        - 1.17.6
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -114,7 +125,7 @@ m_PackageAssets:
         - 2.1.0-preview.3
         - 2.1.0-preview.5
         - 2.1.0-preview.6
-        verified: 1.15.17
+        verified: 1.15.18
       dependencies:
       - name: com.unity.services.core
         version: 1.0.1
@@ -145,7 +156,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -171,7 +182,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: The JetBrains Rider Editor package provides an integration for
         using the JetBrains Rider IDE as a code editor for Unity. It adds support
         for generating .csproj files for code completion and auto-discovery of installations.
@@ -209,6 +220,8 @@ m_PackageAssets:
         - 3.0.12
         - 3.0.13
         - 3.0.14
+        - 3.0.15
+        - 3.0.16
         compatible:
         - 1.0.2
         - 1.0.6
@@ -240,6 +253,8 @@ m_PackageAssets:
         - 3.0.12
         - 3.0.13
         - 3.0.14
+        - 3.0.15
+        - 3.0.16
         verified: 2.0.7
       dependencies:
       - name: com.unity.test-framework
@@ -262,7 +277,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -288,7 +303,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Code editor integration for supporting Visual Studio as code editor
         for unity. Adds support for generating csproj files for intellisense purposes,
         auto discovery of installations, etc.
@@ -314,6 +329,7 @@ m_PackageAssets:
         - 2.0.12
         - 2.0.14
         - 2.0.15
+        - 2.0.16
         compatible:
         - 1.0.2
         - 1.0.3
@@ -333,7 +349,8 @@ m_PackageAssets:
         - 2.0.12
         - 2.0.14
         - 2.0.15
-        verified: 2.0.15
+        - 2.0.16
+        verified: 2.0.16
       dependencies:
       - name: com.unity.test-framework
         version: 1.1.9
@@ -355,7 +372,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -381,7 +398,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Code editor integration for supporting Visual Studio Code as code
         editor for unity. Adds support for generating csproj files for intellisense
         purposes, auto discovery of installations, etc.
@@ -428,7 +445,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -454,7 +471,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: 'Build, edit, and texture custom geometry in Unity. Use ProBuilder
         for in-scene level design, prototyping, collision meshes, all with on-the-fly
         play-testing.
@@ -504,6 +521,7 @@ m_PackageAssets:
         - 5.0.1
         - 5.0.3
         - 5.0.4
+        - 5.0.6
         compatible:
         - 4.0.2
         - 4.0.3
@@ -534,6 +552,7 @@ m_PackageAssets:
         - 5.0.1
         - 5.0.3
         - 5.0.4
+        - 5.0.6
         verified: 4.5.2
       dependencies:
       - name: com.unity.settings-manager
@@ -570,7 +589,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -596,7 +615,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: The Universal Render Pipeline (URP) is a prebuilt Scriptable Render
         Pipeline, made by Unity. URP provides artist-friendly workflows that let
         you quickly and easily create optimized graphics across a range of platforms,
@@ -648,9 +667,13 @@ m_PackageAssets:
         - 10.8.0
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         compatible:
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         verified: 10.8.1
       dependencies:
       - name: com.unity.mathematics
@@ -693,7 +716,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -719,7 +742,7 @@ m_PackageAssets:
         email: 
         url: 
       category: Unity Test Framework
-      type: 
+      type: asset
       description: Test framework for running Edit mode and Play mode tests in Unity.
       status: 4
       errors: []
@@ -758,6 +781,8 @@ m_PackageAssets:
         - 1.1.29
         - 1.1.30
         - 1.1.31
+        - 1.1.33
+        - 1.3.0
         - 2.0.1-exp.1
         - 2.0.1-pre.12
         - 2.0.1-pre.18
@@ -765,10 +790,12 @@ m_PackageAssets:
         - 1.1.29
         - 1.1.30
         - 1.1.31
+        - 1.1.33
+        - 1.3.0
         - 2.0.1-exp.1
         - 2.0.1-pre.12
         - 2.0.1-pre.18
-        verified: 1.1.31
+        verified: 1.1.33
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
@@ -794,7 +821,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -820,7 +847,7 @@ m_PackageAssets:
         email: 
         url: 
       category: Text Rendering
-      type: 
+      type: asset
       description: 'TextMeshPro is the ultimate text solution for Unity. It''s the
         perfect replacement for Unity''s UI Text and the legacy Text Mesh.
 
@@ -960,7 +987,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -986,7 +1013,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Use Unity Timeline to create cinematic content, game-play sequences,
         audio sequences, and complex particle effects.
       status: 4
@@ -1065,6 +1092,7 @@ m_PackageAssets:
         - 1.7.0-pre.2
         - 1.7.0
         - 1.7.1
+        - 1.7.2
         compatible:
         - 1.4.8
         - 1.5.0-pre.2
@@ -1093,6 +1121,7 @@ m_PackageAssets:
         - 1.7.0-pre.2
         - 1.7.0
         - 1.7.1
+        - 1.7.2
         verified: 1.4.8
       dependencies:
       - name: com.unity.modules.director
@@ -1126,7 +1155,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -1215,7 +1244,7 @@ m_PackageAssets:
         email: 
         url: 
       category: XR
-      type: 
+      type: asset
       description: A high-level, component-based, interaction system for creating
         VR and AR experiences. It provides a framework that makes 3D and UI interactions
         available from Unity input events. The core of this system is a set of base
@@ -1246,6 +1275,11 @@ m_PackageAssets:
         - 2.0.0-pre.7
         - 2.0.0
         - 2.0.1
+        - 2.0.2
+        - 2.0.3
+        - 2.1.0-pre.1
+        - 2.1.1
+        - 2.2.0
         compatible:
         - 0.0.6-preview
         - 0.9.0-preview
@@ -1266,6 +1300,11 @@ m_PackageAssets:
         - 2.0.0-pre.7
         - 2.0.0
         - 2.0.1
+        - 2.0.2
+        - 2.0.3
+        - 2.1.0-pre.1
+        - 2.1.1
+        - 2.2.0
         verified: 
       dependencies:
       - name: com.unity.inputsystem
@@ -1314,7 +1353,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -1340,7 +1379,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Provides display and input support for Oculus devices.
       status: 4
       errors: []
@@ -1393,22 +1432,31 @@ m_PackageAssets:
         - 1.11.0
         - 1.11.2
         - 1.12.0
+        - 1.12.1
+        - 1.13.0
         - 2.0.0-preview.1
         - 2.0.0-preview.2
         - 2.0.0-preview.4
         - 2.0.0-preview.5
+        - 2.0.2-preview.1
+        - 2.2.0-preview.1
         - 3.0.0-pre.1
         - 3.0.0-pre.2
         - 3.0.0-pre.4
         - 3.0.0
         - 3.0.1
+        - 3.0.2
+        - 3.1.1
+        - 3.2.1
         compatible:
         - 1.11.2
         - 1.12.0
+        - 1.12.1
         - 2.0.0-preview.1
         - 2.0.0-preview.2
         - 2.0.0-preview.4
         - 2.0.0-preview.5
+        - 2.0.2-preview.1
         - 3.0.0-pre.2
         verified: 1.11.2
       dependencies:
@@ -1455,7 +1503,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3223,7 +3271,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Package that provides simple management of XR plug-ins. Manages
         and offers help with loading, initialization, settings, and build support
         for XR plug-ins.
@@ -3334,7 +3382,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3360,7 +3408,7 @@ m_PackageAssets:
         email: 
         url: 
       category: XR
-      type: 
+      type: asset
       description: This package includes the tracked pose driver for the legacy input
         system, the XR Bindings Seeding Tool and 3Dof Arm Model support for the Tracked
         Pose Driver. The Tracked Pose Driver is a behavior that enables GameObjects
@@ -3395,10 +3443,12 @@ m_PackageAssets:
         - 2.1.7
         - 2.1.8
         - 2.1.9
+        - 2.1.10
         compatible:
         - 2.1.8
         - 2.1.9
-        verified: 2.1.9
+        - 2.1.10
+        verified: 2.1.10
       dependencies:
       - name: com.unity.modules.vr
         version: 1.0.0
@@ -3429,7 +3479,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3455,7 +3505,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: Provides internal registration mechanism for standalone subsystems. 
         It allows a standalone subsystem to inform the Subsystem Manager of its existence.
       status: 4
@@ -3468,11 +3518,13 @@ m_PackageAssets:
         - 1.0.6
         - 1.1.0
         - 1.1.1
+        - 1.1.2
         compatible:
         - 1.0.6
         - 1.1.0
         - 1.1.1
-        verified: 1.1.1
+        - 1.1.2
+        verified: 1.1.2
       dependencies: []
       resolvedDependencies: []
       keywords:
@@ -3487,7 +3539,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3513,7 +3565,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: A new input system which can be used as a more extensible and
         customizable alternative to Unity's classic input system in UnityEngine.Input.
       status: 4
@@ -3552,6 +3604,9 @@ m_PackageAssets:
         - 1.1.1
         - 1.2.0
         - 1.3.0
+        - 1.4.1
+        - 1.4.2
+        - 1.4.3
         compatible:
         - 0.1.2-preview
         - 0.2.0-preview
@@ -3585,6 +3640,9 @@ m_PackageAssets:
         - 1.1.1
         - 1.2.0
         - 1.3.0
+        - 1.4.1
+        - 1.4.2
+        - 1.4.3
         verified: 1.3.0
       dependencies: []
       resolvedDependencies: []
@@ -3605,7 +3663,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3631,7 +3689,7 @@ m_PackageAssets:
         email: 
         url: 
       category: Libraries
-      type: 
+      type: asset
       description: Custom version of the nunit package build to work with Unity.
         Used by the Unity Test Framework.
       status: 4
@@ -3645,6 +3703,7 @@ m_PackageAssets:
         - 1.0.5
         - 1.0.6
         - 2.0.2
+        - 2.0.3
         compatible:
         - 0.1.5-preview
         - 0.1.6-preview
@@ -3653,6 +3712,7 @@ m_PackageAssets:
         - 1.0.5
         - 1.0.6
         - 2.0.2
+        - 2.0.3
         verified: 1.0.6
       dependencies: []
       resolvedDependencies: []
@@ -3668,7 +3728,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3775,7 +3835,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: SRP Core makes it easier to create or customize a Scriptable Render
         Pipeline (SRP). SRP Core contains reusable code, including boilerplate code
         for working with platform-specific graphics APIs, utility functions for common
@@ -3883,9 +3943,13 @@ m_PackageAssets:
         - 10.8.0
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         compatible:
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         verified: 10.8.1
       dependencies:
       - name: com.unity.ugui
@@ -3914,7 +3978,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -3940,7 +4004,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: The Shader Graph package adds a visual Shader editing tool to
         Unity. You can use this tool to create Shaders in a visual way instead of
         writing code. Specific render pipelines can implement specific graph features.
@@ -4045,9 +4109,13 @@ m_PackageAssets:
         - 10.8.0
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         compatible:
         - 10.8.1
         - 10.9.0
+        - 10.10.0
+        - 10.10.1
         verified: 10.8.1
       dependencies:
       - name: com.unity.render-pipelines.core
@@ -4078,7 +4146,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -4104,7 +4172,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: A framework for making any serializable field a setting, complete
         with a pre-built settings interface.
       status: 4
@@ -4166,7 +4234,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: 'This package defines common components used by multiple Game
         Service packages.
 
@@ -4187,6 +4255,11 @@ m_PackageAssets:
         - 1.2.0
         - 1.3.1
         - 1.3.2
+        - 1.4.0
+        - 1.4.1
+        - 1.4.2
+        - 1.4.3
+        - 1.5.2
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -4199,6 +4272,11 @@ m_PackageAssets:
         - 1.2.0
         - 1.3.1
         - 1.3.2
+        - 1.4.0
+        - 1.4.1
+        - 1.4.2
+        - 1.4.3
+        - 1.5.2
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
@@ -4215,7 +4293,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
@@ -4241,7 +4319,7 @@ m_PackageAssets:
         email: 
         url: 
       category: 
-      type: 
+      type: asset
       description: General search window for use in the Editor. First target use
         is for GraphView node search.
       status: 4
@@ -4295,7 +4373,7 @@ m_PackageAssets:
         isDefault: 1
         capabilities: 7
       hasRegistry: 1
-      hideInEditor: 1
+      hideInEditor: 0
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
