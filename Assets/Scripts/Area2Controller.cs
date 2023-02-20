@@ -6,6 +6,10 @@ public class Area2Controller : XRSceneController
 {
     public override void Init()
     {
-        PlayerManager.Instance.hasVisitedArea2 = true;
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.hasVisitedArea2 = true;
+        }
+        
     }
 }

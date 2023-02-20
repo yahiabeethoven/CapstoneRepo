@@ -11,13 +11,22 @@ public class Area1Controller : XRSceneController
 
     public override void Init()
     {
-        if(PlayerManager.Instance.hasVisitedArea2)
+        if (PlayerManager.Instance != null)
         {
-            keyCardSocket.startingSelectedInteractable = keyCard;
-        }        
+            if (PlayerManager.Instance.hasVisitedArea2)
+            {
+                keyCardSocket.startingSelectedInteractable = keyCard;
+            }
+        }
+               
     }
     public override Transform GetXRRigOrigin()
     {
-        return PlayerManager.Instance.hasVisitedArea2 ? xrRigOrigin2 : xrRigOrigin;
+        if (PlayerManager.Instance != null)
+        {
+            return PlayerManager.Instance.hasVisitedArea2 ? xrRigOrigin2 : xrRigOrigin;
+        }
+        return null;
+        
     }
 }
