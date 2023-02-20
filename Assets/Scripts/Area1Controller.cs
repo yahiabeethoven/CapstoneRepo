@@ -11,7 +11,7 @@ public class Area1Controller : XRSceneController
 
     public override void Init()
     {
-        if (PlayerManager.Instance != null)
+        if (PlayerManager.Instance)
         {
             if (PlayerManager.Instance.hasVisitedArea2)
             {
@@ -22,7 +22,7 @@ public class Area1Controller : XRSceneController
     }
     public override Transform GetXRRigOrigin()
     {
-        if (PlayerManager.Instance != null)
+        if (PlayerManager.Instance)
         {
             return PlayerManager.Instance.hasVisitedArea2 ? xrRigOrigin2 : xrRigOrigin;
         }
