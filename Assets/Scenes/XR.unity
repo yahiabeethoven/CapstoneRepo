@@ -233,6 +233,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 352186ae3d1f14592acecc4664aab122, type: 3}
   m_PrefabInstance: {fileID: 120016886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &158546197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8419711eb0d514f8cb01cb80749e83bc, type: 3}
+  m_PrefabInstance: {fileID: 1790639667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171717425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,19 +1371,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.96419036
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.26521116
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1386,7 +1391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 164.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 900763830908396561, guid: 57d6ece38ef9641efbff3a91d13e00f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2841,6 +2846,8 @@ MonoBehaviour:
   characters:
   - {fileID: 120016888}
   - {fileID: 1290830030}
+  - {fileID: 158546197}
+  currentAvatar: {fileID: 0}
 --- !u!4 &1878040455
 Transform:
   m_ObjectHideFlags: 0
