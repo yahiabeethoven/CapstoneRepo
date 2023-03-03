@@ -11,6 +11,7 @@ public class Area1Controller : XRSceneController
 
     public override void Init()
     {
+        //Debug.Log("area1 controller begins");
         if (PlayerManager.Instance)
         {
             if (PlayerManager.Instance.hasVisitedArea2)

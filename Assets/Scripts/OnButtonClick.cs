@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class OnButtonClick : MonoBehaviour
 {
-    public Button userButton;
+    public Button cooperateButton;
+    public Button defectButton;
     private void Start()
     {
-        userButton.onClick.AddListener(CallDelayBot);
+        Debug.Log("Button script started");
+        cooperateButton.onClick.AddListener(CallDelayBot);
+        defectButton.onClick.AddListener(CallDelayBot);
     }
 
-    void CallDelayBot()
+    public void CallDelayBot()
     {
+        Debug.Log("Button has been pressed");
         GameObject.Find("Characters").GetComponent<CharacterRandomization>().DelayAnimation();
     }
 }

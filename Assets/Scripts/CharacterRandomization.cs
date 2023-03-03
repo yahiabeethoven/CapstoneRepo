@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
+    public Animator animator;
     //public GameObject currentAvatar;
 
     //public CharacterRandomization(List<GameObject> characters)
@@ -14,6 +15,7 @@ public class CharacterRandomization : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("Randomization script started");
         int x = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
         foreach (GameObject Char in characters)
         {
@@ -24,6 +26,7 @@ public class CharacterRandomization : MonoBehaviour
         }
         //currentAvatar = characters[x];
         characters[x].SetActive(true);
+        animator = characters[x].GetComponent<Animator>();
     }
 
     public void DelayAnimation()
@@ -39,9 +42,15 @@ public class CharacterRandomization : MonoBehaviour
         //call the function of animation start
     }
 
-    void StartAnimation()
+    public void StartAnimation()
     {
         //access the animator and call the necesary animation
+        animator.SetTrigger("ButtonPush");
+        Invoke(nameof(ResetTrigger), animator.GetCurrentAnimatorStateInfo(0).length);
+    }
+    private void ResetTrigger()
+    {
+        animator.ResetTrigger("ButtonPush");
     }
 
 }
