@@ -15,6 +15,7 @@ public class CharacterRandomization : MonoBehaviour
 
     public void Start()
     {
+
         Debug.Log("Randomization script started");
         int x = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
         foreach (GameObject Char in characters)
@@ -27,10 +28,12 @@ public class CharacterRandomization : MonoBehaviour
         //currentAvatar = characters[x];
         characters[x].SetActive(true);
         animator = characters[x].GetComponent<Animator>();
+        animator.SetTrigger("Idle");
     }
 
     public void DelayAnimation()
     {
+        Debug.Log("Delay started");
         int z = Random.Range(4, 11);
         StartCoroutine(DelayBotAction(z));
     }
@@ -39,6 +42,7 @@ public class CharacterRandomization : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         StartAnimation();
+        
         //call the function of animation start
     }
 
@@ -47,10 +51,12 @@ public class CharacterRandomization : MonoBehaviour
         //access the animator and call the necesary animation
         animator.SetTrigger("ButtonPush");
         Invoke(nameof(ResetTrigger), animator.GetCurrentAnimatorStateInfo(0).length);
+        
     }
     private void ResetTrigger()
     {
         animator.ResetTrigger("ButtonPush");
+        animator.SetTrigger("Idle");
     }
 
 }

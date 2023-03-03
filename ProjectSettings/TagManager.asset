@@ -7,6 +7,8 @@ TagManager:
   - XRRigOrigin
   - XRRig
   - XRSceneController
+  - CooperateButton
+  - DefectButton
   layers:
   - Default
   - TransparentFX

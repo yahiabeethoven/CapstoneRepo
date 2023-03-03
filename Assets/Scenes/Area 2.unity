@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CooperateButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8131038773274488916, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
+      propertyPath: m_TagString
+      value: CooperateButton
+      objectReference: {fileID: 0}
     - target: {fileID: 8131038773274488918, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -378,8 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee408ad592f534cf995e5645392e19dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooperateButton: {fileID: 48855959}
-  defectButton: {fileID: 487396573}
+  currentButton: {fileID: 48855959}
 --- !u!43 &69659924
 Mesh:
   m_ObjectHideFlags: 0
@@ -623,6 +626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefectButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8131038773274488916, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
+      propertyPath: m_TagString
+      value: DefectButton
+      objectReference: {fileID: 0}
     - target: {fileID: 8131038773274488918, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -774,8 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee408ad592f534cf995e5645392e19dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooperateButton: {fileID: 48855959}
-  defectButton: {fileID: 487396573}
+  currentButton: {fileID: 487396573}
 --- !u!1001 &846600142
 PrefabInstance:
   m_ObjectHideFlags: 0
