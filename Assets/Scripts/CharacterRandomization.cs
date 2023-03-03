@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
-    public GameObject currentAvatar;
+    //public GameObject currentAvatar;
 
     //public CharacterRandomization(List<GameObject> characters)
     //{
@@ -22,7 +22,7 @@ public class CharacterRandomization : MonoBehaviour
                 Char.SetActive(false);
             }
         }
-        currentAvatar = characters[x];
+        //currentAvatar = characters[x];
         characters[x].SetActive(true);
     }
 

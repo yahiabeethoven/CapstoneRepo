@@ -545,7 +545,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-57526
+  m_Name: pb_Mesh70700
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -995,7 +995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-57538
+  m_Name: pb_Mesh70400
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_KeepSelectedTargetValid: 1
@@ -2847,7 +2847,6 @@ MonoBehaviour:
   - {fileID: 120016888}
   - {fileID: 1290830030}
   - {fileID: 158546197}
-  currentAvatar: {fileID: 0}
 --- !u!4 &1878040455
 Transform:
   m_ObjectHideFlags: 0
@@ -2871,7 +2870,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh122196
+  m_Name: pb_Mesh71104
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
