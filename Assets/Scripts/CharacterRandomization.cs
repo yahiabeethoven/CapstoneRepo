@@ -5,8 +5,9 @@ using UnityEngine;
 public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
-    public Animator animator;
-    //public GameObject currentAvatar;
+    //public Animator animator;
+    //public bool test = false;
+    public GameObject currentAvatar;
 
     //public CharacterRandomization(List<GameObject> characters)
     //{
@@ -25,38 +26,52 @@ public class CharacterRandomization : MonoBehaviour
                 Char.SetActive(false);
             }
         }
-        //currentAvatar = characters[x];
+        currentAvatar = characters[x];
         characters[x].SetActive(true);
-        animator = characters[x].GetComponent<Animator>();
-        animator.SetTrigger("Idle");
+        //animator = characters[x].GetComponent<Animator>();
+        //animator.SetTrigger("Idle");
     }
 
-    public void DelayAnimation()
-    {
-        Debug.Log("Delay started");
-        int z = Random.Range(4, 11);
-        StartCoroutine(DelayBotAction(z));
-    }
+    //public void DelayAnimation()
+    //{
+    //    Debug.Log("Delay started");
+    //    int z = Random.Range(4, 11);
+    //    //StartCoroutine(DelayBotAction(z));
+    //}
 
-    IEnumerator DelayBotAction(int delay)
-    {
-        yield return new WaitForSeconds(delay);
-        StartAnimation();
+    //private void Update()
+    //{
+    //    if (test)
+    //    {
+    //        StartCoroutine(RunButtonPushinAnim());
+    //        print("hi");
+    //        test = false;
+    //    }
+    //}
+
+    //IEnumerator DelayBotAction(int delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    StartCoroutine(RunButtonPushinAnim());
         
-        //call the function of animation start
-    }
+    //    //call the function of animation start
+    //}
 
-    public void StartAnimation()
-    {
-        //access the animator and call the necesary animation
-        animator.SetTrigger("ButtonPush");
-        Invoke(nameof(ResetTrigger), animator.GetCurrentAnimatorStateInfo(0).length);
-        
-    }
-    private void ResetTrigger()
-    {
-        animator.ResetTrigger("ButtonPush");
-        animator.SetTrigger("Idle");
-    }
+    //public void StartAnimation()
+    //{
+    //    //access the animator and call the necesary animation
+    //    StartCoroutine(RunButtonPushinAnim());
+    //}
+    //private void ResetTrigger()
+    //{
+    //    animator.ResetTrigger("ButtonPush");
+    //    animator.SetTrigger("Idle");
+    //}
 
+    //IEnumerator RunButtonPushinAnim()
+    //{
+    //    animator.SetBool("ButtonPush", true);
+    //    yield return new WaitForSeconds(1.8f);
+    //    animator.SetBool("ButtonPush", false);
+    //}
 }

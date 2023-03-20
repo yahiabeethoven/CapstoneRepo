@@ -24,6 +24,6 @@ public class OnButtonClick : MonoBehaviour
             Debug.Log("Defect Button has been pressed");
         }
 
-        GameObject.Find("Characters").GetComponent<CharacterRandomization>().DelayAnimation();
+        GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation();
     }
 }
