@@ -5,9 +5,19 @@ using DG.Tweening;
 
 public class TestingTween : MonoBehaviour
 {
-    private void Start()
+    //private void Start()
+    //{
+        
+    //}
+    private void Update()
     {
-        StartCoroutine(StartDelayed());
+
+        Debug.Log(GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination);
+        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
+        {
+            StartCoroutine(StartDelayed());
+            return;
+        }
     }
     private void init()
     {

@@ -9,6 +9,7 @@ TagManager:
   - XRSceneController
   - CooperateButton
   - DefectButton
+  - Transporter
   layers:
   - Default
   - TransparentFX
