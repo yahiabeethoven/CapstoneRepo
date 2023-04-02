@@ -5,10 +5,6 @@ using DG.Tweening;
 
 public class TestingTween : MonoBehaviour
 {
-    //private void Start()
-    //{
-        
-    //}
     private void Update()
     {
 
@@ -21,11 +17,11 @@ public class TestingTween : MonoBehaviour
     }
     private void init()
     {
-        transform.GetComponent<RectTransform>().DOAnchorPosY(0, 1f);
+        transform.GetComponent<RectTransform>().DOAnchorPosY(-170, 1f);
     }
     IEnumerator StartDelayed()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(30f);
         init();
     }
 }

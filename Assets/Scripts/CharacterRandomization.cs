@@ -28,6 +28,7 @@ public class CharacterRandomization : MonoBehaviour
         }
         currentAvatar = characters[x];
         characters[x].SetActive(true);
+        Debug.Log("the current character is number: " + x);
         //animator = characters[x].GetComponent<Animator>();
         //animator.SetTrigger("Idle");
     }
