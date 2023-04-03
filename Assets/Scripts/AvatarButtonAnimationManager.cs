@@ -10,7 +10,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public void DelayAnimation()
     {
         Debug.Log("Delay started");
-        int z = Random.Range(4, 11);
+        int z = Random.Range(0, 5);
         StartCoroutine(DelayBotAction(z));
     }
 

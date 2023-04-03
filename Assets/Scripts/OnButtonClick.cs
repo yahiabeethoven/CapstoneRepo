@@ -26,15 +26,19 @@ public class OnButtonClick : MonoBehaviour
             Debug.Log("Defect Button has been pressed");
             GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation();
         }
-        else
+        else if (currentButton.tag == "ContinueButton")
         {
             Debug.Log("Continue Button has been clicked");
-            if (currentCanvas.activeInHierarchy)
-            {
-                currentCanvas.SetActive(false);
-            }
+            StartCoroutine(MenuDelayed());
         }
-
-        
+    }
+    public void CloseMenu()
+    {
+        DestroyImmediate(currentCanvas, true);
+    }
+    IEnumerator MenuDelayed()
+    {
+        yield return new WaitForSeconds(1.5f);
+        CloseMenu();
     }
 }

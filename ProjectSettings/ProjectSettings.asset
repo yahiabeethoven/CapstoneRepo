@@ -46,7 +46,7 @@ PlayerSettings:
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
-  m_StereoRenderingPath: 0
+  m_StereoRenderingPath: 2
   m_ActiveColorSpace: 1
   m_MTRendering: 1
   mipStripping: 0
@@ -176,6 +176,7 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 1263642040990395322, guid: 3bb61aa982839434897f319ea685815a, type: 2}
   - {fileID: 11400000, guid: a4e40b70531485f47974879026685b23, type: 2}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1

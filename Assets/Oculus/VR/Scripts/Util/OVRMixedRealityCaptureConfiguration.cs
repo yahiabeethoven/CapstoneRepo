@@ -35,7 +35,8 @@ public interface OVRMixedRealityCaptureConfiguration
 	OVRManager.CompositionMethod compositionMethod { get; set; }
 	Color externalCompositionBackdropColorRift { get; set; }
 	Color externalCompositionBackdropColorQuest { get; set; }
-	OVRManager.CameraDevice capturingCameraDevice { get; set; }
+    [Obsolete]
+    OVRManager.CameraDevice capturingCameraDevice { get; set; }
 	bool flipCameraFrameHorizontally { get; set; }
 	bool flipCameraFrameVertically { get; set; }
 	float handPoseStateLatency { get; set; }
@@ -46,10 +47,12 @@ public interface OVRMixedRealityCaptureConfiguration
 	float chromaKeySmoothRange { get; set; }
 	float chromaKeySpillRange { get; set; }
 	bool useDynamicLighting { get; set; }
-	OVRManager.DepthQuality depthQuality { get; set; }
+    [Obsolete]
+    OVRManager.DepthQuality depthQuality { get; set; }
 	float dynamicLightingSmoothFactor { get; set; }
 	float dynamicLightingDepthVariationClampingValue { get; set; }
-	OVRManager.VirtualGreenScreenType virtualGreenScreenType { get; set; }
+    [Obsolete]
+    OVRManager.VirtualGreenScreenType virtualGreenScreenType { get; set; }
 	float virtualGreenScreenTopY { get; set; }
 	float virtualGreenScreenBottomY { get; set; }
 	bool virtualGreenScreenApplyDepthCulling { get; set; }
@@ -62,12 +65,14 @@ public interface OVRMixedRealityCaptureConfiguration
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_ANDROID
 public static class OVRMixedRealityCaptureConfigurationExtensions
 {
-	public static void ApplyTo(this OVRMixedRealityCaptureConfiguration dest, OVRMixedRealityCaptureConfiguration source) 
+    [Obsolete]
+    public static void ApplyTo(this OVRMixedRealityCaptureConfiguration dest, OVRMixedRealityCaptureConfiguration source) 
 	{
 		dest.ReadFrom(source);
 	}
 
-	public static void ReadFrom(this OVRMixedRealityCaptureConfiguration dest, OVRMixedRealityCaptureConfiguration source)
+    [Obsolete]
+    public static void ReadFrom(this OVRMixedRealityCaptureConfiguration dest, OVRMixedRealityCaptureConfiguration source)
 	{
 		dest.enableMixedReality = source.enableMixedReality;
 		dest.compositionMethod = source.compositionMethod;

@@ -5746,7 +5746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8131038773274488916, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
       propertyPath: m_TagString
-      value: CooperateButton
+      value: ContinueButton
       objectReference: {fileID: 0}
     - target: {fileID: 8131038773274488918, guid: 7ffe00f4caacb433e8c2e4968b8d2911, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
