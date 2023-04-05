@@ -194,7 +194,7 @@ namespace Meta.WitAi
         public int Timeout => _timeoutMs;
 
         private bool configurationRequired;
-        private string callingStackTrace;
+        private string callingStackTrace = "";
         private DateTime requestStartTime;
         private ConcurrentQueue<byte[]> writeBuffer = new ConcurrentQueue<byte[]>();
 

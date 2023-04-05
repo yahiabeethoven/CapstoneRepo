@@ -6,36 +6,35 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 {
     public Animator animator;
     public bool test = false;
+    private int buttonIndex;
 
-    public void DelayAnimation()
+    public void DelayAnimation(int bIndex)
     {
+        buttonIndex = bIndex;
         Debug.Log("Delay started");
         int z = Random.Range(0, 5);
         StartCoroutine(DelayBotAction(z));
     }
 
-    private void Update()
-    {
-        //Debugging:
-        //if (test)
-        //{
-        //    StartCoroutine(RunButtonPushinAnim());
-        //    print("hi");
-        //    test = false;
-        //}
-    }
-
     IEnumerator DelayBotAction(int delay)
     {
         yield return new WaitForSeconds(delay);
-        StartCoroutine(RunButtonPushinAnim());
+        StartCoroutine(RunButtonPushingAnimation());
     }
 
 
-    IEnumerator RunButtonPushinAnim()
+    IEnumerator RunButtonPushingAnimation()
     {
         animator.SetBool("ButtonPush", true);
         yield return new WaitForSeconds(1.8f);
         animator.SetBool("ButtonPush", false);
+        if (buttonIndex == 0)
+        {
+            GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(10,0);
+        }
+        else
+        {
+            GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(0, 10);
+        }
     }
 }

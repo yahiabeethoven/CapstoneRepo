@@ -36,7 +36,8 @@ public class OVRMixedRealityCaptureSettings : ScriptableObject, OVRMixedRealityC
 	public OVRManager.CompositionMethod compositionMethod = OVRManager.CompositionMethod.External;
 	public Color externalCompositionBackdropColorRift = Color.green;
 	public Color externalCompositionBackdropColorQuest = Color.clear;
-	public OVRManager.CameraDevice capturingCameraDevice = OVRManager.CameraDevice.WebCamera0;
+    [Obsolete]
+    public OVRManager.CameraDevice capturingCameraDevice = OVRManager.CameraDevice.WebCamera0;
 	public bool flipCameraFrameHorizontally = false;
 	public bool flipCameraFrameVertically = false;
 	public float handPoseStateLatency = 0.0f;
@@ -47,10 +48,12 @@ public class OVRMixedRealityCaptureSettings : ScriptableObject, OVRMixedRealityC
 	public float chromaKeySmoothRange = 0.03f;
 	public float chromaKeySpillRange = 0.04f;
 	public bool useDynamicLighting = false;
-	public OVRManager.DepthQuality depthQuality = OVRManager.DepthQuality.Medium;
+    [Obsolete]
+    public OVRManager.DepthQuality depthQuality = OVRManager.DepthQuality.Medium;
 	public float dynamicLightingSmoothFactor = 8.0f;
 	public float dynamicLightingDepthVariationClampingValue = 0.001f;
-	public OVRManager.VirtualGreenScreenType virtualGreenScreenType = OVRManager.VirtualGreenScreenType.Off;
+    [Obsolete]
+    public OVRManager.VirtualGreenScreenType virtualGreenScreenType = OVRManager.VirtualGreenScreenType.Off;
 	public float virtualGreenScreenTopY;
 	public float virtualGreenScreenBottomY;
 	public bool virtualGreenScreenApplyDepthCulling = false;
@@ -65,7 +68,9 @@ public class OVRMixedRealityCaptureSettings : ScriptableObject, OVRMixedRealityC
 	OVRManager.CompositionMethod OVRMixedRealityCaptureConfiguration.compositionMethod { get { return compositionMethod; } set { compositionMethod = value; } }
 	Color OVRMixedRealityCaptureConfiguration.externalCompositionBackdropColorRift { get { return externalCompositionBackdropColorRift; } set { externalCompositionBackdropColorRift = value; } }
 	Color OVRMixedRealityCaptureConfiguration.externalCompositionBackdropColorQuest { get { return externalCompositionBackdropColorQuest; } set { externalCompositionBackdropColorQuest = value; } }
-	OVRManager.CameraDevice OVRMixedRealityCaptureConfiguration.capturingCameraDevice { get { return capturingCameraDevice; } set { capturingCameraDevice = value; } }
+
+    [Obsolete]
+    OVRManager.CameraDevice OVRMixedRealityCaptureConfiguration.capturingCameraDevice { get { return capturingCameraDevice; } set { capturingCameraDevice = value; } }
 	bool OVRMixedRealityCaptureConfiguration.flipCameraFrameHorizontally { get { return flipCameraFrameHorizontally; } set { flipCameraFrameHorizontally = value; } }
 	bool OVRMixedRealityCaptureConfiguration.flipCameraFrameVertically { get { return flipCameraFrameVertically; } set { flipCameraFrameVertically = value; } }
 	float OVRMixedRealityCaptureConfiguration.handPoseStateLatency { get { return handPoseStateLatency; } set { handPoseStateLatency = value; } }
@@ -76,10 +81,14 @@ public class OVRMixedRealityCaptureSettings : ScriptableObject, OVRMixedRealityC
 	float OVRMixedRealityCaptureConfiguration.chromaKeySmoothRange { get { return chromaKeySmoothRange; } set { chromaKeySmoothRange = value; } }
 	float OVRMixedRealityCaptureConfiguration.chromaKeySpillRange { get { return chromaKeySpillRange; } set { chromaKeySpillRange = value; } }
 	bool OVRMixedRealityCaptureConfiguration.useDynamicLighting { get { return useDynamicLighting; } set { useDynamicLighting = value; } }
-	OVRManager.DepthQuality OVRMixedRealityCaptureConfiguration.depthQuality { get { return depthQuality; } set { depthQuality = value; } }
+
+    [Obsolete]
+    OVRManager.DepthQuality OVRMixedRealityCaptureConfiguration.depthQuality { get { return depthQuality; } set { depthQuality = value; } }
 	float OVRMixedRealityCaptureConfiguration.dynamicLightingSmoothFactor { get { return dynamicLightingSmoothFactor; } set { dynamicLightingSmoothFactor = value; } }
 	float OVRMixedRealityCaptureConfiguration.dynamicLightingDepthVariationClampingValue { get { return dynamicLightingDepthVariationClampingValue; } set { dynamicLightingDepthVariationClampingValue = value; } }
-	OVRManager.VirtualGreenScreenType OVRMixedRealityCaptureConfiguration.virtualGreenScreenType { get { return virtualGreenScreenType; } set { virtualGreenScreenType = value; } }
+
+    [Obsolete]
+    OVRManager.VirtualGreenScreenType OVRMixedRealityCaptureConfiguration.virtualGreenScreenType { get { return virtualGreenScreenType; } set { virtualGreenScreenType = value; } }
 	float OVRMixedRealityCaptureConfiguration.virtualGreenScreenTopY { get { return virtualGreenScreenTopY; } set { virtualGreenScreenTopY = value; } }
 	float OVRMixedRealityCaptureConfiguration.virtualGreenScreenBottomY { get { return virtualGreenScreenBottomY; } set { virtualGreenScreenBottomY = value; } }
 	bool OVRMixedRealityCaptureConfiguration.virtualGreenScreenApplyDepthCulling { get { return virtualGreenScreenApplyDepthCulling; } set { virtualGreenScreenApplyDepthCulling = value; } }

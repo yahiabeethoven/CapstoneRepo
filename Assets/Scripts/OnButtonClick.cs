@@ -19,22 +19,24 @@ public class OnButtonClick : MonoBehaviour
         if (currentButton.tag == "CooperateButton")
         {
             Debug.Log("Cooperate Button has been pressed");
-            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation();
+            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(0);
         }
         else if (currentButton.tag == "DefectButton")
         {
             Debug.Log("Defect Button has been pressed");
-            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation();
+            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(1);
         }
         else if (currentButton.tag == "ContinueButton")
         {
             Debug.Log("Continue Button has been clicked");
             StartCoroutine(MenuDelayed());
+            return;
         }
     }
     public void CloseMenu()
     {
         DestroyImmediate(currentCanvas, true);
+        Debug.Log("canvas destroyed");
     }
     IEnumerator MenuDelayed()
     {
