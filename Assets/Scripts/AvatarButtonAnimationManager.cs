@@ -7,6 +7,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public Animator animator;
     public bool test = false;
     private int buttonIndex;
+    public GameObject ScoreTable;
 
     public void DelayAnimation(int bIndex)
     {
@@ -30,11 +31,13 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         animator.SetBool("ButtonPush", false);
         if (buttonIndex == 0)
         {
-            GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(10,0);
+            ScoreTable.GetComponent<TestScore>().ChangeScore(+10f, +0f);
+            //GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(+10f, +0f);
         }
         else
         {
-            GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(0, 10);
+            ScoreTable.GetComponent<TestScore>().ChangeScore(+0f, +10f);
+            //GameObject.Find("Score Table").GetComponent<TestScore>().ChangeScore(+0f, +10f);
         }
     }
 }

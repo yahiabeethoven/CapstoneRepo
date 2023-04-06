@@ -11,6 +11,7 @@ TagManager:
   - DefectButton
   - Transporter
   - ContinueButton
+  - ScoreTable
   layers:
   - Default
   - TransparentFX
