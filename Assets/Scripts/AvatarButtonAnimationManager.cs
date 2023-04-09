@@ -21,6 +21,12 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private float singleCooperate = -10f;
     private float mutualDefect = -5f;
 
+    private int bothCoop = 0;
+    private int firstDefect = 1;
+    private int secondDefect = 2;
+    private int bothDefect = 3;
+    private int currentOutcome = -1;
+
     private int currentPhase = 1;
     private int currentRound = 1;
 
@@ -72,11 +78,13 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, mutualCooperate, mutualCooperate);
                 prevButtonIndex = cooperateIndex;
+                currentOutcome = bothCoop;
             }
             else
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleDefect, singleCooperate);
                 prevButtonIndex = defectIndex;
+                currentOutcome = firstDefect;
             }    
         }
         else if (prevButtonIndex == cooperateIndex) // if opponent pushed button 0 last time, push button 0 this time
@@ -84,11 +92,13 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             if (buttonIndex == cooperateIndex)
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, mutualCooperate, mutualCooperate);
+                currentOutcome = bothCoop;
             }
             else
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleDefect, singleCooperate);
                 prevButtonIndex = defectIndex;
+                currentOutcome = firstDefect;
             }
         }
         else // if opponent pushed button 1 last time, push button 1 this time
@@ -97,24 +107,34 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleCooperate, singleDefect);
                 prevButtonIndex = cooperateIndex;
+                currentOutcome = secondDefect;
             }
             else
             {
                 ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, mutualDefect, mutualDefect);
+                currentOutcome = bothDefect;
             }
             
         }
         animator.SetBool("ButtonPush", false);
         thisButton.interactable = true;
         diffButton.interactable = true;
-        if (thisButton.tag == "CooperateButton")
+
+        if (currentOutcome == 0)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("Cooperate button pressed");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("Both cooperated");
         }
-        else
+        else if (currentOutcome == 1)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("Defect button pressed");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("player 1 defected, player 2 cooperated");
         }
-        
+        else if (currentOutcome == 2)
+        {
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("player 1 cooperated, player 2 defected");
+        }
+        else if (currentOutcome == 3)
+        {
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("both players defected");
+        }    
     }
 }

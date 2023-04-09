@@ -27,12 +27,10 @@ public class OnButtonClick : MonoBehaviour
             if (currentButton.tag == "CooperateButton")
             {
                 GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 0);
-                //ShowPopup("Cooperate button pressed");
             }
             else
             {
                 GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 1);
-                //ShowPopup("Defect button pressed");
             }
         }
         else if (currentButton.tag == "ContinueButton")
