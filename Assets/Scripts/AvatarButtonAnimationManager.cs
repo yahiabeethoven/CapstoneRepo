@@ -107,5 +107,14 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         animator.SetBool("ButtonPush", false);
         thisButton.interactable = true;
         diffButton.interactable = true;
+        if (thisButton.tag == "CooperateButton")
+        {
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("Cooperate button pressed");
+        }
+        else
+        {
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("Defect button pressed");
+        }
+        
     }
 }

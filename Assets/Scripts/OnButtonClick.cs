@@ -8,11 +8,14 @@ public class OnButtonClick : MonoBehaviour
     public Button currentButton;
     public Button otherButton;
     public GameObject currentCanvas;
+    public GameObject popupPanel;
+    public TMPro.TMP_Text popupText;
 
     private void Start()
     {
         Debug.Log("Button script started");
         currentButton.onClick.AddListener(CallDelayBot);
+        popupPanel.SetActive(false);
     }
 
     public void CallDelayBot()
@@ -24,10 +27,12 @@ public class OnButtonClick : MonoBehaviour
             if (currentButton.tag == "CooperateButton")
             {
                 GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 0);
+                //ShowPopup("Cooperate button pressed");
             }
             else
             {
                 GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 1);
+                //ShowPopup("Defect button pressed");
             }
         }
         else if (currentButton.tag == "ContinueButton")
@@ -46,5 +51,16 @@ public class OnButtonClick : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         CloseMenu();
+    }
+    public void ShowPopup(string message)
+    {
+        popupText.text = message;
+        popupPanel.SetActive(true);
+        StartCoroutine(HidePopupAfterDelay());
+    }
+    IEnumerator HidePopupAfterDelay()
+    {
+        yield return new WaitForSeconds(2f); // change the delay time as needed
+        popupPanel.SetActive(false);
     }
 }
