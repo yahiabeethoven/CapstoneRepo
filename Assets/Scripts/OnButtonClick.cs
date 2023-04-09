@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class OnButtonClick : MonoBehaviour
 {
     public Button currentButton;
+    public Button otherButton;
     public GameObject currentCanvas;
-    //public Button defectButton;
+
     private void Start()
     {
         Debug.Log("Button script started");
@@ -16,15 +17,18 @@ public class OnButtonClick : MonoBehaviour
 
     public void CallDelayBot()
     {
-        if (currentButton.tag == "CooperateButton")
+        if (currentButton.tag == "CooperateButton" || currentButton.tag == "DefectButton")
         {
-            Debug.Log("Cooperate Button has been pressed");
-            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(0);
-        }
-        else if (currentButton.tag == "DefectButton")
-        {
-            Debug.Log("Defect Button has been pressed");
-            GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(1);
+            currentButton.interactable = false;
+            otherButton.interactable = false;
+            if (currentButton.tag == "CooperateButton")
+            {
+                GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 0);
+            }
+            else
+            {
+                GameObject.Find("Y Bot@Button Pushing").GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 1);
+            }
         }
         else if (currentButton.tag == "ContinueButton")
         {

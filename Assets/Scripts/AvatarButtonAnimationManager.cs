@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AvatarButtonAnimationManager : MonoBehaviour
 {
     public Animator animator;
     public GameObject ScoreTable;
+    private Button thisButton;
+    private Button diffButton;
 
     private int buttonIndex;
     private int prevButtonIndex = -1;           // this is the simulated player's way of keeping track of the subject's last move to copy it (tit for tat)
@@ -21,8 +24,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
-    public void DelayAnimation(int bIndex)
+    public void DelayAnimation(Button button, Button other, int bIndex)
     {
+        diffButton = other;
+        thisButton = button;
         buttonIndex = bIndex;
         Debug.Log("Delay started");
         int z = Random.Range(0, 5);
@@ -100,5 +105,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             
         }
         animator.SetBool("ButtonPush", false);
+        thisButton.interactable = true;
+        diffButton.interactable = true;
     }
 }
