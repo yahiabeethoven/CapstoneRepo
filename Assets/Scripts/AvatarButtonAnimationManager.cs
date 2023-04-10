@@ -120,21 +120,21 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton.interactable = true;
         diffButton.interactable = true;
 
-        if (currentOutcome == 0)
+        if (currentOutcome == bothCoop)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("Both cooperated");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: "+mutualCooperate.ToString()+ "\nOpponent: "+ mutualCooperate.ToString() +"\n\nOutcome: you both cooperated");
         }
-        else if (currentOutcome == 1)
+        else if (currentOutcome == firstDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("player 1 defected, player 2 cooperated");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated");
         }
-        else if (currentOutcome == 2)
+        else if (currentOutcome == secondDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("player 1 cooperated, player 2 defected");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected");
         }
-        else if (currentOutcome == 3)
+        else if (currentOutcome == bothDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("both players defected");
+            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: " + mutualDefect.ToString() + "\nOpponent: " + mutualDefect.ToString() + "\n\nOutcome: you both defected");
         }    
     }
 }

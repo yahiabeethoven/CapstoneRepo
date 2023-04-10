@@ -58,7 +58,7 @@ public class OnButtonClick : MonoBehaviour
     }
     IEnumerator HidePopupAfterDelay()
     {
-        yield return new WaitForSeconds(2f); // change the delay time as needed
+        yield return new WaitForSeconds(3f); // change the delay time as needed
         popupPanel.SetActive(false);
     }
 }
