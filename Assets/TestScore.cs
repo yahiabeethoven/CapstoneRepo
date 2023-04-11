@@ -8,6 +8,7 @@ public class TestScore : MonoBehaviour
     public TMPro.TMP_Text subjectScore;
     public TMPro.TMP_Text computerScore;
     public GameObject[] rows;
+    private GameObject rowObject;
 
     public void Start()
     {
@@ -44,7 +45,38 @@ public class TestScore : MonoBehaviour
     }
     public void ChangeScore(int phase, float subjectChange, float computerChange)
     {
-        GameObject rowObject = FindRow(phase);
+        //rowObject = FindRow(phase);
+        //if (rowObject != null)
+        //{
+        //    subjectScore = rowObject.transform.Find("SubjectScore" + phase.ToString()).GetComponentInChildren<TMP_Text>();
+        //    computerScore = rowObject.transform.Find("OpponentScore" + phase.ToString()).GetComponentInChildren<TMP_Text>();
+
+        //    subjectScore.text = (float.Parse(subjectScore.text) + subjectChange).ToString();
+        //    computerScore.text = (float.Parse(computerScore.text) + computerChange).ToString();
+        //}
+        // Loop through all rows
+
+        for (int i = 0; i < rows.Length; i++)
+        {
+            if (i < phase - 1) // Previous rounds
+            {
+                rows[i].SetActive(true); // Show the row
+                TMP_Text roundLabel = rows[i].transform.Find("Round" + (i + 1) + "Label").GetComponentInChildren<TMP_Text>();
+                roundLabel.color = Color.white; // Set the color to white
+            }
+            else if (i == phase - 1) // Current round
+            {
+                rows[i].SetActive(true); // Show the row
+                TMP_Text roundLabel = rows[i].transform.Find("Round" + phase + "Label").GetComponentInChildren<TMP_Text>();
+                roundLabel.color = Color.green; // Set the color to green
+            }
+            else // Future rounds
+            {
+                rows[i].SetActive(false); // Hide the row
+            }
+        }
+
+        rowObject = FindRow(phase);
         if (rowObject != null)
         {
             subjectScore = rowObject.transform.Find("SubjectScore" + phase.ToString()).GetComponentInChildren<TMP_Text>();
@@ -52,6 +84,9 @@ public class TestScore : MonoBehaviour
 
             subjectScore.text = (float.Parse(subjectScore.text) + subjectChange).ToString();
             computerScore.text = (float.Parse(computerScore.text) + computerChange).ToString();
-        }         
+
+            subjectScore.color = Color.green;
+            computerScore.color = Color.green;
+        }
     }
 }
