@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CharacterRandomization : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CharacterRandomization : MonoBehaviour
     public Texture2D currentImage;
     public Material projectedCanvas;
     public int currentIndex;
+    private TMPro.TMP_Text avatarRace;
 
     public void Start()
     {
@@ -30,11 +32,11 @@ public class CharacterRandomization : MonoBehaviour
         Debug.Log("the current character is number: " + x);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            ChangeProjectedCanvas(currentImage);
+            ChangeProjectedCanvas(currentImage, currentIndex);
         }
         
     }
-    public void ChangeProjectedCanvas(Texture2D img)
+    public void ChangeProjectedCanvas(Texture2D img, int index)
     {
         Material newMaterial = new Material(projectedCanvas);
 
@@ -43,6 +45,32 @@ public class CharacterRandomization : MonoBehaviour
 
         // Set the new material on the object's renderer
         GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
+        avatarRace = GameObject.Find("UpdateAvatar").GetComponentInChildren<TMP_Text>();
+
+        if (index == 0)
+        {
+            avatarRace.text = "Ethnic Background:\nWhite Female";
+        }
+        else if (index == 1)
+        {
+            avatarRace.text = "Ethnic Background:\nArab Female";
+        }
+        else if (index == 3)
+        {
+            avatarRace.text = "Ethnic Background:\nAsian Female";
+        }
+        else if (index == 4)
+        {
+            avatarRace.text = "Ethnic Background:\nBlack Male";
+        }
+        else if (index == 5)
+        {
+            avatarRace.text = "Ethnic Background:\nArab Male";
+        }
+        else
+        {
+            avatarRace.text = "Ethnic Background:\nWhite Male";
+        }
     }
     
 }
