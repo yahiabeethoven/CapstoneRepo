@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class AvatarButtonAnimationManager : MonoBehaviour
 {
@@ -30,6 +32,29 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
+    private string csvFilePath = "scores.csv";
+    private StringBuilder csvContent = new StringBuilder();
+
+    public void Start()
+    {
+        // create or open CSV file
+        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
+        csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
+        writer.Write(csvContent); // write the headers to the CSV file
+        writer.Close(); // close the file
+    }
+
+    public void UpdateCSV(int roundNumber, int subjectChoice, int computerChoice)
+    {
+        // add the round number, subject choice, and computer choice to the CSV content
+        csvContent.Append(roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
+
+        // write the updated CSV content to the file
+        StreamWriter writer = new StreamWriter(csvFilePath, false); // set the second parameter to false to overwrite the file
+        writer.Write(csvContent);
+        writer.Close();
+    }
+
     public void DelayAnimation(Button button, Button other, int bIndex)
     {
         diffButton = other;
@@ -40,6 +65,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
+            UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
             if (currentRound == 10)
             {
                 if (currentPhase == 10)
