@@ -5,14 +5,11 @@ using UnityEngine;
 public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
-    //public Animator animator;
-    //public bool test = false;
+    public List<Texture2D> avatarImages;
     public GameObject currentAvatar;
-
-    //public CharacterRandomization(List<GameObject> characters)
-    //{
-    //    this.characters = characters;
-    //}
+    public Texture2D currentImage;
+    public Material projectedCanvas;
+    public int currentIndex;
 
     public void Start()
     {
@@ -26,53 +23,26 @@ public class CharacterRandomization : MonoBehaviour
                 Char.SetActive(false);
             }
         }
+        currentImage = avatarImages[x];
         currentAvatar = characters[x];
         characters[x].SetActive(true);
+        currentIndex = x;
         Debug.Log("the current character is number: " + x);
-        //animator = characters[x].GetComponent<Animator>();
-        //animator.SetTrigger("Idle");
-    }
-
-    //public void DelayAnimation()
-    //{
-    //    Debug.Log("Delay started");
-    //    int z = Random.Range(4, 11);
-    //    //StartCoroutine(DelayBotAction(z));
-    //}
-
-    //private void Update()
-    //{
-    //    if (test)
-    //    {
-    //        StartCoroutine(RunButtonPushinAnim());
-    //        print("hi");
-    //        test = false;
-    //    }
-    //}
-
-    //IEnumerator DelayBotAction(int delay)
-    //{
-    //    yield return new WaitForSeconds(delay);
-    //    StartCoroutine(RunButtonPushinAnim());
+        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
+        {
+            ChangeProjectedCanvas(currentImage);
+        }
         
-    //    //call the function of animation start
-    //}
+    }
+    public void ChangeProjectedCanvas(Texture2D img)
+    {
+        Material newMaterial = new Material(projectedCanvas);
 
-    //public void StartAnimation()
-    //{
-    //    //access the animator and call the necesary animation
-    //    StartCoroutine(RunButtonPushinAnim());
-    //}
-    //private void ResetTrigger()
-    //{
-    //    animator.ResetTrigger("ButtonPush");
-    //    animator.SetTrigger("Idle");
-    //}
+        // Assign the texture to the material's main texture property
+        newMaterial.mainTexture = img;
 
-    //IEnumerator RunButtonPushinAnim()
-    //{
-    //    animator.SetBool("ButtonPush", true);
-    //    yield return new WaitForSeconds(1.8f);
-    //    animator.SetBool("ButtonPush", false);
-    //}
+        // Set the new material on the object's renderer
+        GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
+    }
+    
 }

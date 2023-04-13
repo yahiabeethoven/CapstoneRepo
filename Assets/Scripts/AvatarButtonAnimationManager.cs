@@ -33,6 +33,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentRound = 1;
 
     private string csvFilePath = "scores.csv";
+    private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
 
     public void Start()
@@ -61,11 +62,11 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton = button;
         buttonIndex = bIndex;
         Debug.Log("Delay started");
-        int z = Random.Range(0, 5);
+        int z = Random.Range(0, 3);
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
-            UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
+            
             if (currentRound == 10)
             {
                 if (currentPhase == 10)
@@ -82,6 +83,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             {
                 currentRound++;
             }
+            UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
         
     }
@@ -148,19 +150,26 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (currentOutcome == bothCoop)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: "+mutualCooperate.ToString()+ "\nOpponent: "+ mutualCooperate.ToString() +"\n\nOutcome: you both cooperated");
+            updateMsg = "You: " + mutualCooperate.ToString() + "\nOpponent: " + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
         }
         else if (currentOutcome == firstDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated");
+            updateMsg = "You: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated";
         }
         else if (currentOutcome == secondDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected");
+            updateMsg = "You: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected";
         }
         else if (currentOutcome == bothDefect)
         {
-            thisButton.GetComponent<OnButtonClick>().ShowPopup("You: " + mutualDefect.ToString() + "\nOpponent: " + mutualDefect.ToString() + "\n\nOutcome: you both defected");
-        }    
+            updateMsg = "You: " + mutualDefect.ToString() + "\nOpponent: " + mutualDefect.ToString() + "\n\nOutcome: you both defected";
+        }
+
+        if (currentRound == 10)
+        {
+            updateMsg += "\n\nRound "+currentPhase.ToString()+" completed!";
+        }
+        thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
+        
     }
 }
