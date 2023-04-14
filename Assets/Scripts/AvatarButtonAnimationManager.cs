@@ -32,7 +32,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
-    private string csvFilePath = "scores.csv";
+    private string csvFilePath = "Assets/scores.csv";
     private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
 
@@ -43,15 +43,26 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
         writer.Write(csvContent); // write the headers to the CSV file
         writer.Close(); // close the file
+
+        /*
+        "Round Number,Subject Choice,Computer Choice\n"
+        "2, cooperate, not cooperate"
+
+
+
+
+
+         */
     }
 
     public void UpdateCSV(int roundNumber, int subjectChoice, int computerChoice)
     {
+        csvContent.Clear();
         // add the round number, subject choice, and computer choice to the CSV content
         csvContent.Append(roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
 
         // write the updated CSV content to the file
-        StreamWriter writer = new StreamWriter(csvFilePath, false); // set the second parameter to false to overwrite the file
+        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to false to overwrite the file
         writer.Write(csvContent);
         writer.Close();
     }

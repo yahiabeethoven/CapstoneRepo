@@ -2,16 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
-    public List<Texture2D> avatarImages;
+    public List<Sprite> avatarSprites;
     public GameObject currentAvatar;
-    public Texture2D currentImage;
+    public Sprite currentSprite;
     public Material projectedCanvas;
     public int currentIndex;
     private TMPro.TMP_Text avatarRace;
+
+    private Texture2D canvasBg;
+
+    public static CharacterRandomization Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != this && Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
     public void Start()
     {
@@ -25,14 +43,15 @@ public class CharacterRandomization : MonoBehaviour
                 Char.SetActive(false);
             }
         }
-        currentImage = avatarImages[x];
+        currentSprite = avatarSprites[x];
         currentAvatar = characters[x];
         characters[x].SetActive(true);
         currentIndex = x;
         Debug.Log("the current character is number: " + x);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            ChangeProjectedCanvas(currentImage, currentIndex);
+            //ChangeProjectedCanvas(currentImage, currentIndex);
+            GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = currentSprite;
         }
         
     }
@@ -47,6 +66,9 @@ public class CharacterRandomization : MonoBehaviour
         GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
         avatarRace = GameObject.Find("UpdateAvatar").GetComponentInChildren<TMP_Text>();
 
+        TextureToSprite textureToSprite = GameObject.Find("AvatarDescriptionBG").GetComponentInChildren<TextureToSprite>();
+        textureToSprite.sourceImage = img;
+
         if (index == 0)
         {
             avatarRace.text = "Ethnic Background:\nWhite Female";
@@ -55,19 +77,19 @@ public class CharacterRandomization : MonoBehaviour
         {
             avatarRace.text = "Ethnic Background:\nArab Female";
         }
-        else if (index == 3)
+        else if (index == 2)
         {
             avatarRace.text = "Ethnic Background:\nAsian Female";
         }
-        else if (index == 4)
+        else if (index == 3)
         {
             avatarRace.text = "Ethnic Background:\nBlack Male";
         }
-        else if (index == 5)
+        else if (index == 4)
         {
             avatarRace.text = "Ethnic Background:\nArab Male";
         }
-        else
+        else if (index == 5)
         {
             avatarRace.text = "Ethnic Background:\nWhite Male";
         }
