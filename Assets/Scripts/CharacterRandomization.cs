@@ -90,27 +90,27 @@ public class CharacterRandomization : MonoBehaviour
 
         if (index == 0)
         {
-            avatarRace.text = "Racial Background: White\nGender: Female";
+            avatarRace.text = "YOU:\nRacial Background: White\nGender: Female";
         }
         else if (index == 1)
         {
-            avatarRace.text = "Racial Background: Arab\nGender: Female";
+            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Female";
         }
         else if (index == 2)
         {
-            avatarRace.text = "Racial Background: Asian\nGender: Female";
+            avatarRace.text = "YOU:\nRacial Background: Asian\nGender: Female";
         }
         else if (index == 3)
         {
-            avatarRace.text = "Racial Background: Black\nGender: Male";
+            avatarRace.text = "YOU:\nRacial Background: Black\nGender: Male";
         }
         else if (index == 4)
         {
-            avatarRace.text = "Racial Background: Arab\nGender: Male";
+            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Male";
         }
         else if (index == 5)
         {
-            avatarRace.text = "Racial Background: White\nGender: Male";
+            avatarRace.text = "YOU:\nRacial Background: White\nGender: Male";
         }
     }
 
@@ -122,27 +122,27 @@ public class CharacterRandomization : MonoBehaviour
 
         if (index == 0)
         {
-            avatarRace.text = "Racial Background: White\nGender: Female";
+            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Female";
         }
         else if (index == 1)
         {
-            avatarRace.text = "Racial Background: Arab\nGender: Female";
+            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Female";
         }
         else if (index == 2)
         {
-            avatarRace.text = "Racial Background: Asian\nGender: Female";
+            avatarRace.text = "OPPONENT:\nRacial Background: Asian\nGender: Female";
         }
         else if (index == 3)
         {
-            avatarRace.text = "Racial Background: Black\nGender: Male";
+            avatarRace.text = "OPPONENT:\nRacial Background: Black\nGender: Male";
         }
         else if (index == 4)
         {
-            avatarRace.text = "Racial Background: Arab\nGender: Male";
+            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Male";
         }
         else if (index == 5)
         {
-            avatarRace.text = "Racial Background: White\nGender: Male";
+            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Male";
         }
     }
 
