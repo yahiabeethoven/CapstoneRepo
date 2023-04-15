@@ -9,10 +9,15 @@ public class CharacterRandomization : MonoBehaviour
 {
     public List<GameObject> characters;
     public List<Sprite> avatarSprites;
-    public GameObject currentAvatar;
-    public Sprite currentSprite;
+    public GameObject subjectAvatar;
+    public GameObject opponentAvatar;
+
+    public Sprite subjectSprite;
+    public Sprite opponentSprite;
     public Material handColor;
-    public int currentIndex;
+
+    public int subjectIndex;
+    public int opponentIndex;
     private TMPro.TMP_Text avatarRace;
 
     Color whiteTone = new Color(255f / 255f, 226f / 255f, 191f / 255f);
@@ -39,6 +44,8 @@ public class CharacterRandomization : MonoBehaviour
 
         Debug.Log("Randomization script started");
         int x = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
+        int y = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
+
         foreach (GameObject Char in characters)
         {
             if (Char.activeInHierarchy)
@@ -46,15 +53,25 @@ public class CharacterRandomization : MonoBehaviour
                 Char.SetActive(false);
             }
         }
-        currentSprite = avatarSprites[x];
-        currentAvatar = characters[x];
-        characters[x].SetActive(true);
-        currentIndex = x;
-        Debug.Log("the current character is number: " + x);
+        subjectSprite = avatarSprites[x];
+        subjectAvatar = characters[x];
+
+        opponentSprite = avatarSprites[y];
+        opponentAvatar = characters[y];
+
+        characters[y].SetActive(true);
+
+        subjectIndex = x;
+        opponentIndex = y;
+
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            ChangeProjectedCanvas(currentSprite, currentIndex);
-            ChangeHandColor(currentIndex);
+            ChangeProjectedCanvas(subjectSprite, subjectIndex);
+            ChangeHandColor(subjectIndex);
+        }
+        else
+        {
+
         }
         
     }
