@@ -32,13 +32,17 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
-    private string csvFilePath = "Assets/scores.csv";
+    //private string csvFilePath = "Assets/scores.csv";
+    private string csvFilePath;
     private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
 
     public void Start()
     {
+        csvFilePath = Application.dataPath + "/Data/test.csv";
+         //csvFilePath = "Assets/scores.csv";
         // create or open CSV file
+
         StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
         csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
         writer.Write(csvContent); // write the headers to the CSV file
