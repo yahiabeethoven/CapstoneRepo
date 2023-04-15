@@ -11,11 +11,14 @@ public class CharacterRandomization : MonoBehaviour
     public List<Sprite> avatarSprites;
     public GameObject currentAvatar;
     public Sprite currentSprite;
-    public Material projectedCanvas;
+    public Material handColor;
     public int currentIndex;
     private TMPro.TMP_Text avatarRace;
 
-    private Texture2D canvasBg;
+    Color whiteTone = new Color(255f / 255f, 226f / 255f, 191f / 255f);
+    Color asianTone = new Color(255f / 255f, 214f / 255f, 180f / 255f);
+    Color arabTone = new Color(179f / 255f, 97f / 255f, 35f / 255f);
+    Color blackTone = new Color(102f / 255f, 71f / 255f, 46f / 255f);
 
     public static CharacterRandomization Instance { get; private set; }
     private void Awake()
@@ -51,23 +54,13 @@ public class CharacterRandomization : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
             ChangeProjectedCanvas(currentSprite, currentIndex);
-            //GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = currentSprite;
+            ChangeHandColor(currentIndex);
         }
         
     }
     public void ChangeProjectedCanvas(Sprite spr, int index)
     {
-        //Material newMaterial = new Material(projectedCanvas);
-
-        //// Assign the texture to the material's main texture property
-        //newMaterial.mainTexture = img;
-
-        //// Set the new material on the object's renderer
-        //GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
         avatarRace = GameObject.Find("AvatarDescription").GetComponentInChildren<TMP_Text>();
-
-        //TextureToSprite textureToSprite = GameObject.Find("AvatarDescriptionBG").GetComponentInChildren<TextureToSprite>();
-        //textureToSprite.sourceImage = img;
 
         GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = spr;
 
@@ -96,5 +89,32 @@ public class CharacterRandomization : MonoBehaviour
             avatarRace.text = "Ethnic Background:\nWhite Male";
         }
     }
-    
+
+    public void ChangeHandColor(int index)
+    {
+        if (index == 0)
+        {
+            handColor.color = whiteTone;
+        }
+        else if (index == 1)
+        {
+            handColor.color = arabTone;
+        }
+        else if (index == 2)
+        {
+            handColor.color = asianTone;
+        }
+        else if (index == 3)
+        {
+            handColor.color = blackTone;
+        }
+        else if (index == 4)
+        {
+            handColor.color = arabTone;
+        }
+        else if (index == 5)
+        {
+            handColor.color = whiteTone;
+        }
+    }
 }

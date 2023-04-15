@@ -14,9 +14,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
     private int buttonIndex;
     private int prevButtonIndex = -1;           // this is the simulated player's way of keeping track of the subject's last move to copy it (tit for tat)
-    private int firstMove = -1;
-    private int cooperateIndex = 0;
-    private int defectIndex = 1;
+    private readonly int firstMove = -1;
+    private readonly int cooperateIndex = 0;
+    private readonly int defectIndex = 1;
 
     private float mutualCooperate = -2f;
     private float singleDefect = +0f;

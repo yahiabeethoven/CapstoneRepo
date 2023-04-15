@@ -3419,6 +3419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceImage: {fileID: 0}
+  bgSprite: {fileID: 0}
+  myImage: {fileID: 0}
 --- !u!43 &1685480875
 Mesh:
   m_ObjectHideFlags: 0
@@ -3905,7 +3907,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c58145bbeb65a409499a058d305158b6, type: 3}
   currentAvatar: {fileID: 0}
   currentSprite: {fileID: 0}
-  projectedCanvas: {fileID: 2100000, guid: 8695faa0b22134d048b28d1ba8aed7c5, type: 2}
+  handColor: {fileID: 2100000, guid: 99786a2b0732c4bb7bd08374c5e87333, type: 2}
   currentIndex: 0
 --- !u!4 &1878040455
 Transform:
