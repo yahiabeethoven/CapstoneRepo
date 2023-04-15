@@ -31,6 +31,7 @@ public class CharacterRandomization : MonoBehaviour
         if (Instance != this && Instance != null)
         {
             Destroy(this);
+            Debug.Log("Destroyed Other Instance");
         }
         else
         {
@@ -38,10 +39,8 @@ public class CharacterRandomization : MonoBehaviour
         }
     }
 
-
     public void Start()
     {
-
         Debug.Log("Randomization script started");
         int x = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
         int y = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
@@ -59,23 +58,31 @@ public class CharacterRandomization : MonoBehaviour
         opponentSprite = avatarSprites[y];
         opponentAvatar = characters[y];
 
-        characters[y].SetActive(true);
-
         subjectIndex = x;
         opponentIndex = y;
+    }
 
+    public void Update()
+    {
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            ChangeProjectedCanvas(subjectSprite, subjectIndex);
+            ChangeProjectedCanvas1(subjectSprite, subjectIndex);
             ChangeHandColor(subjectIndex);
         }
         else
         {
-
+            foreach (GameObject Char in characters)
+            {
+                if (Char.activeInHierarchy)
+                {
+                    Char.SetActive(false);
+                }
+            }
+            opponentAvatar.SetActive(true);
+            ChangeProjectedCanvas2(opponentSprite, opponentIndex);
         }
-        
     }
-    public void ChangeProjectedCanvas(Sprite spr, int index)
+    public void ChangeProjectedCanvas1(Sprite spr, int index)
     {
         avatarRace = GameObject.Find("AvatarDescription").GetComponentInChildren<TMP_Text>();
 
@@ -83,27 +90,59 @@ public class CharacterRandomization : MonoBehaviour
 
         if (index == 0)
         {
-            avatarRace.text = "Ethnic Background:\nWhite Female";
+            avatarRace.text = "Racial Background: White\nGender: Female";
         }
         else if (index == 1)
         {
-            avatarRace.text = "Ethnic Background:\nArab Female";
+            avatarRace.text = "Racial Background: Arab\nGender: Female";
         }
         else if (index == 2)
         {
-            avatarRace.text = "Ethnic Background:\nAsian Female";
+            avatarRace.text = "Racial Background: Asian\nGender: Female";
         }
         else if (index == 3)
         {
-            avatarRace.text = "Ethnic Background:\nBlack Male";
+            avatarRace.text = "Racial Background: Black\nGender: Male";
         }
         else if (index == 4)
         {
-            avatarRace.text = "Ethnic Background:\nArab Male";
+            avatarRace.text = "Racial Background: Arab\nGender: Male";
         }
         else if (index == 5)
         {
-            avatarRace.text = "Ethnic Background:\nWhite Male";
+            avatarRace.text = "Racial Background: White\nGender: Male";
+        }
+    }
+
+    public void ChangeProjectedCanvas2(Sprite spr, int index)
+    {
+        avatarRace = GameObject.Find("OpponentDescription").GetComponentInChildren<TMP_Text>();
+
+        GameObject.Find("OpponentSprite").GetComponentInChildren<Image>().sprite = spr;
+
+        if (index == 0)
+        {
+            avatarRace.text = "Racial Background: White\nGender: Female";
+        }
+        else if (index == 1)
+        {
+            avatarRace.text = "Racial Background: Arab\nGender: Female";
+        }
+        else if (index == 2)
+        {
+            avatarRace.text = "Racial Background: Asian\nGender: Female";
+        }
+        else if (index == 3)
+        {
+            avatarRace.text = "Racial Background: Black\nGender: Male";
+        }
+        else if (index == 4)
+        {
+            avatarRace.text = "Racial Background: Arab\nGender: Male";
+        }
+        else if (index == 5)
+        {
+            avatarRace.text = "Racial Background: White\nGender: Male";
         }
     }
 
