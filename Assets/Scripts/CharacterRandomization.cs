@@ -50,24 +50,26 @@ public class CharacterRandomization : MonoBehaviour
         Debug.Log("the current character is number: " + x);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            //ChangeProjectedCanvas(currentImage, currentIndex);
-            GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = currentSprite;
+            ChangeProjectedCanvas(currentSprite, currentIndex);
+            //GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = currentSprite;
         }
         
     }
-    public void ChangeProjectedCanvas(Texture2D img, int index)
+    public void ChangeProjectedCanvas(Sprite spr, int index)
     {
-        Material newMaterial = new Material(projectedCanvas);
+        //Material newMaterial = new Material(projectedCanvas);
 
-        // Assign the texture to the material's main texture property
-        newMaterial.mainTexture = img;
+        //// Assign the texture to the material's main texture property
+        //newMaterial.mainTexture = img;
 
-        // Set the new material on the object's renderer
-        GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
-        avatarRace = GameObject.Find("UpdateAvatar").GetComponentInChildren<TMP_Text>();
+        //// Set the new material on the object's renderer
+        //GameObject.Find("Quad").GetComponent<Renderer>().material = newMaterial;
+        avatarRace = GameObject.Find("AvatarDescription").GetComponentInChildren<TMP_Text>();
 
-        TextureToSprite textureToSprite = GameObject.Find("AvatarDescriptionBG").GetComponentInChildren<TextureToSprite>();
-        textureToSprite.sourceImage = img;
+        //TextureToSprite textureToSprite = GameObject.Find("AvatarDescriptionBG").GetComponentInChildren<TextureToSprite>();
+        //textureToSprite.sourceImage = img;
+
+        GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = spr;
 
         if (index == 0)
         {
