@@ -37,9 +37,17 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
 
+
+    public Text t;
     public void Start()
     {
+        animator = GetComponent<Animator>();
+        ScoreTable = GameObject.Find("ScoreTable");
+
         csvFilePath = Application.dataPath + "/Data/test.csv";
+        print(Application.dataPath);
+        if (t != null)
+            t.text = Application.dataPath;
          //csvFilePath = "Assets/scores.csv";
         // create or open CSV file
 
@@ -47,6 +55,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
         writer.Write(csvContent); // write the headers to the CSV file
         writer.Close(); // close the file
+        System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
 
         /*
         "Round Number,Subject Choice,Computer Choice\n"
