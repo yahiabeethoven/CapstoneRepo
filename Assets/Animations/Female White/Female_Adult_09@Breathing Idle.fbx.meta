@@ -9,7 +9,22 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: white_idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: f009_body
+    second: {fileID: 2100000, guid: 300892568d9954686808a835afb787de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: f009_head
+    second: {fileID: 2100000, guid: 0a09748918ed3419199d4b32efa66b4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: f009_opacity
+    second: {fileID: 2100000, guid: 70f43fd8ba2a44a7cad1b7bb00b50793, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

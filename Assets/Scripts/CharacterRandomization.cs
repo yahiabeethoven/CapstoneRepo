@@ -60,10 +60,15 @@ public class CharacterRandomization : MonoBehaviour
 
         subjectIndex = x;
         opponentIndex = y;
-    }
 
-    public void Update()
-    {
+        foreach (GameObject Char in characters)
+        {
+            if (Char.activeInHierarchy)
+            {
+                Char.SetActive(false);
+            }
+        }
+
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
             ChangeProjectedCanvas1(subjectSprite, subjectIndex);
@@ -71,19 +76,35 @@ public class CharacterRandomization : MonoBehaviour
         }
         else
         {
-            foreach (GameObject Char in characters)
-            {
-                if (Char.activeInHierarchy)
-                {
-                    Char.SetActive(false);
-                }
-            }
+            
             opponentAvatar.SetActive(true);
             ChangeProjectedCanvas2(opponentSprite, opponentIndex);
         }
     }
+
+    public void Update()
+    {
+        //if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
+        //{
+        //    ChangeProjectedCanvas1(subjectSprite, subjectIndex);
+        //    ChangeHandColor(subjectIndex);
+        //}
+        //else
+        //{
+        //    foreach (GameObject Char in characters)
+        //    {
+        //        if (Char.activeInHierarchy)
+        //        {
+        //            Char.SetActive(false);
+        //        }
+        //    }
+        //    opponentAvatar.SetActive(true);
+        //    ChangeProjectedCanvas2(opponentSprite, opponentIndex);
+        //}
+    }
     public void ChangeProjectedCanvas1(Sprite spr, int index)
     {
+
         avatarRace = GameObject.Find("AvatarDescription").GetComponentInChildren<TMP_Text>();
 
         GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = spr;
@@ -116,6 +137,10 @@ public class CharacterRandomization : MonoBehaviour
 
     public void ChangeProjectedCanvas2(Sprite spr, int index)
     {
+        if (!opponentAvatar.activeSelf)
+        {
+            opponentAvatar.SetActive(true);
+        }
         avatarRace = GameObject.Find("OpponentDescription").GetComponentInChildren<TMP_Text>();
 
         GameObject.Find("OpponentSprite").GetComponentInChildren<Image>().sprite = spr;

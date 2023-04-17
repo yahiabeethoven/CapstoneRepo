@@ -23,12 +23,20 @@ public class OnButtonClick : MonoBehaviour
             opponentAvatar = GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar;
             print("sucessfully set opponentavatar");
         }
+        if (opponentAvatar == null && GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar != null)
+        {
+            opponentAvatar = GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar;
+            print("sucessfully set opponentavatar");
+        }
     }
-    
 
+    private void Update()
+    {
+        
+    }
     public void CallDelayBot()
     {
-        if (opponentAvatar== null)
+        if (opponentAvatar == null && GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar != null)
         {
             opponentAvatar = GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar;
             print("sucessfully set opponentavatar");

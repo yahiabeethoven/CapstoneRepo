@@ -42,23 +42,23 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("ButtonPush", false);
+        //animator.SetBool("ButtonPush", false);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
             ScoreTable = GameObject.Find("ScoreTable");
         }
 
         //csvFilePath = Application.dataPath + "/Data/test.csv";
-        print(Application.dataPath);
+        //print(Application.dataPath);
         //if (t != null)
         //    t.text = Application.dataPath;
-        csvFilePath = "Assets/scores.csv";
+        //csvFilePath = "Assets/scores.csv";
         //// create or open CSV file
 
-        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
-        csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
-        writer.Write(csvContent); // write the headers to the CSV file
-        writer.Close(); // close the file
+        //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
+        //csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
+        //writer.Write(csvContent); // write the headers to the CSV file
+        //writer.Close(); // close the file
         //System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
 
         /*
@@ -70,6 +70,19 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
 
          */
+    }
+    private void Update()
+    {
+        //if (animator.GetBool("ButtonPush") == true)
+        //{
+        //    Debug.Log("Currently pushing button !!!!!!!!!!!!!!!!!!!!!");
+        //}
+        //if (animator.GetBool("ButtonPush") != true)
+        //{
+        //    animator.SetBool("ButtonPush", true);
+        //}
+        
+        
     }
 
     public void UpdateCSV(int roundNumber, int subjectChoice, int computerChoice)
@@ -111,7 +124,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             {
                 currentRound++;
             }
-            UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
+            //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
         
     }
@@ -127,7 +140,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     {
         animator.SetBool("ButtonPush", true);
         yield return new WaitForSeconds(1.8f);
-        
+
         if (prevButtonIndex == firstMove) // first move, push button 0
         {
             if (buttonIndex == cooperateIndex)
