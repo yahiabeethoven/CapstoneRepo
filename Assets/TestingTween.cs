@@ -21,7 +21,7 @@ public class TestingTween : MonoBehaviour
     }
     IEnumerator StartDelayed()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(30f);
         init();
     }
 }
