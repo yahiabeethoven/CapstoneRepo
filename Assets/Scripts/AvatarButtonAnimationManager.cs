@@ -32,17 +32,34 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
-    private string csvFilePath = "Assets/scores.csv";
+    //private string csvFilePath = "Assets/scores.csv";
+    private string csvFilePath;
     private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
 
+
+    public Text t;
     public void Start()
     {
-        // create or open CSV file
+        animator = GetComponent<Animator>();
+        animator.SetBool("ButtonPush", false);
+        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
+        {
+            ScoreTable = GameObject.Find("ScoreTable");
+        }
+
+        //csvFilePath = Application.dataPath + "/Data/test.csv";
+        print(Application.dataPath);
+        //if (t != null)
+        //    t.text = Application.dataPath;
+        csvFilePath = "Assets/scores.csv";
+        //// create or open CSV file
+
         StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
         csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
         writer.Write(csvContent); // write the headers to the CSV file
         writer.Close(); // close the file
+        //System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
 
         /*
         "Round Number,Subject Choice,Computer Choice\n"
@@ -155,9 +172,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             }
             
         }
-        animator.SetBool("ButtonPush", false);
-        thisButton.interactable = true;
-        diffButton.interactable = true;
+        
+        
 
         if (currentOutcome == bothCoop)
         {
@@ -181,6 +197,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             updateMsg += "\n\nRound "+currentPhase.ToString()+" completed!";
         }
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
-        
+        animator.SetBool("ButtonPush", false);
+        thisButton.interactable = true;
+        diffButton.interactable = true;
+
     }
 }
