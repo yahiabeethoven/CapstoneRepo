@@ -84,11 +84,11 @@ public class CharacterRandomization : MonoBehaviour
 
     public void Update()
     {
-        //if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
-        //{
-        //    ChangeProjectedCanvas1(subjectSprite, subjectIndex);
-        //    ChangeHandColor(subjectIndex);
-        //}
+        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2" && PlayerManager.Instance.hasVisitedArea2 == true)
+        {
+            ChangeProjectedCanvas1(subjectSprite, subjectIndex);
+            ChangeHandColor(subjectIndex);
+        }
         //else
         //{
         //    foreach (GameObject Char in characters)

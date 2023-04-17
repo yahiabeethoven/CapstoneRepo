@@ -7970,7 +7970,6 @@ GameObject:
   - component: {fileID: 1731697874}
   - component: {fileID: 1731697873}
   - component: {fileID: 1731697876}
-  - component: {fileID: 1731697872}
   m_Layer: 5
   m_Name: CanvasScreen
   m_TagString: Untagged
@@ -7978,18 +7977,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1731697872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731697871}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802f3cb9aec3e4c9e8cb62a80bcf15d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1731697873
 MonoBehaviour:
   m_ObjectHideFlags: 0
