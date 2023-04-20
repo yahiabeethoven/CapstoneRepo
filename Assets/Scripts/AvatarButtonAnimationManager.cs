@@ -42,7 +42,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
-        //animator.SetBool("ButtonPush", false);
+        animator.SetBool("ButtonPush", false);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
             ScoreTable = GameObject.Find("ScoreTable");

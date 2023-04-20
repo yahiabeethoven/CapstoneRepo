@@ -3,199 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class CharacterRandomization : MonoBehaviour
 {
-    public List<GameObject> characters;
-    public List<Sprite> avatarSprites;
-    public GameObject subjectAvatar;
-    public GameObject opponentAvatar;
+    private GameObject opponentAvatar;
+    public string scene1Name;
+    public string scene2Name;
 
-    public Sprite subjectSprite;
-    public Sprite opponentSprite;
-    public Material handColor;
+    //private void Start()
+    //{
+    //    AvatarRandomizationManager avatarManager = AvatarRandomizationManager.Instance;
+    //    if (avatarManager != null)
+    //    {
+    //        opponentAvatar = avatarManager.GetOpponentAvatar();
+    //        opponentAvatar.SetActive(false);
+    //    }
+    //}
 
-    public int subjectIndex;
-    public int opponentIndex;
-    private TMPro.TMP_Text avatarRace;
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnSceneLoaded;
+    //}
 
-    Color whiteTone = new Color(255f / 255f, 226f / 255f, 191f / 255f);
-    Color asianTone = new Color(255f / 255f, 214f / 255f, 180f / 255f);
-    Color arabTone = new Color(179f / 255f, 97f / 255f, 35f / 255f);
-    Color blackTone = new Color(102f / 255f, 71f / 255f, 46f / 255f);
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //}
 
-    public static CharacterRandomization Instance { get; private set; }
-    private void Awake()
-    {
-        if (Instance != this && Instance != null)
-        {
-            Destroy(this);
-            Debug.Log("Destroyed Other Instance");
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
+    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    AvatarRandomizationManager avatarManager = AvatarRandomizationManager.Instance;
+    //    if (avatarManager != null)
+    //    {
+    //        foreach (GameObject Char in avatarManager.avatars)
+    //        {
+    //            if (Char.activeInHierarchy)
+    //            {
+    //                Char.SetActive(false);
+    //                Debug.Log("Deleted avatarsss");
+    //            }
+    //        }
 
-    public void Start()
-    {
-        Debug.Log("Randomization script started");
-        int x = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
-        int y = Random.Range(0, characters.Count);//make dynamic by doing characters size instead of a constant number 5
+    //        if (scene.name == scene2Name)
+    //        {
+    //            Debug.Log("We are in scene 2-------");
+    //            // activate opponent avatar if in scene 2
+    //            avatarManager.GetOpponentAvatar().SetActive(true);
+    //            Debug.Log("set char to active");
 
-        foreach (GameObject Char in characters)
-        {
-            if (Char.activeInHierarchy)
-            {
-                Char.SetActive(false);
-            }
-        }
-        subjectSprite = avatarSprites[x];
-        subjectAvatar = characters[x];
+    //            // update avatar descriptions
+    //            avatarManager.ChangeCanvasScene2();
+    //            Debug.Log("Updated canvas in scene 2");
+    //        }
+    //        else if (scene.name == scene1Name)
+    //        {
+    //            Debug.Log("We are in scene 1!!!!!!");
+    //            if (avatarManager.GetOpponentAvatar().activeInHierarchy)
+    //            {
+    //                // deactivate opponent avatar if in scene 1
+    //                avatarManager.GetOpponentAvatar().SetActive(false);
+    //            }
 
-        opponentSprite = avatarSprites[y];
-        opponentAvatar = characters[y];
-
-        subjectIndex = x;
-        opponentIndex = y;
-
-        foreach (GameObject Char in characters)
-        {
-            if (Char.activeInHierarchy)
-            {
-                Char.SetActive(false);
-            }
-        }
-
-        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2")
-        {
-            ChangeProjectedCanvas1(subjectSprite, subjectIndex);
-            ChangeHandColor(subjectIndex);
-        }
-        else
-        {
-            
-            opponentAvatar.SetActive(true);
-            ChangeProjectedCanvas2(opponentSprite, opponentIndex);
-        }
-    }
-
-    public void Update()
-    {
-        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 2" && PlayerManager.Instance.hasVisitedArea2 == true)
-        {
-            ChangeProjectedCanvas1(subjectSprite, subjectIndex);
-            ChangeHandColor(subjectIndex);
-        }
-        //else
-        //{
-        //    foreach (GameObject Char in characters)
-        //    {
-        //        if (Char.activeInHierarchy)
-        //        {
-        //            Char.SetActive(false);
-        //        }
-        //    }
-        //    opponentAvatar.SetActive(true);
-        //    ChangeProjectedCanvas2(opponentSprite, opponentIndex);
-        //}
-    }
-    public void ChangeProjectedCanvas1(Sprite spr, int index)
-    {
-
-        avatarRace = GameObject.Find("AvatarDescription").GetComponentInChildren<TMP_Text>();
-
-        GameObject.Find("AvatarSprite").GetComponentInChildren<Image>().sprite = spr;
-
-        if (index == 0)
-        {
-            avatarRace.text = "YOU:\nRacial Background: White\nGender: Female";
-        }
-        else if (index == 1)
-        {
-            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Female";
-        }
-        else if (index == 2)
-        {
-            avatarRace.text = "YOU:\nRacial Background: Asian\nGender: Female";
-        }
-        else if (index == 3)
-        {
-            avatarRace.text = "YOU:\nRacial Background: Black\nGender: Male";
-        }
-        else if (index == 4)
-        {
-            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Male";
-        }
-        else if (index == 5)
-        {
-            avatarRace.text = "YOU:\nRacial Background: White\nGender: Male";
-        }
-    }
-
-    public void ChangeProjectedCanvas2(Sprite spr, int index)
-    {
-        if (!opponentAvatar.activeSelf)
-        {
-            opponentAvatar.SetActive(true);
-        }
-        avatarRace = GameObject.Find("OpponentDescription").GetComponentInChildren<TMP_Text>();
-
-        GameObject.Find("OpponentSprite").GetComponentInChildren<Image>().sprite = spr;
-
-        if (index == 0)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Female";
-        }
-        else if (index == 1)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Female";
-        }
-        else if (index == 2)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: Asian\nGender: Female";
-        }
-        else if (index == 3)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: Black\nGender: Male";
-        }
-        else if (index == 4)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Male";
-        }
-        else if (index == 5)
-        {
-            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Male";
-        }
-    }
-
-    public void ChangeHandColor(int index)
-    {
-        if (index == 0)
-        {
-            handColor.color = whiteTone;
-        }
-        else if (index == 1)
-        {
-            handColor.color = arabTone;
-        }
-        else if (index == 2)
-        {
-            handColor.color = asianTone;
-        }
-        else if (index == 3)
-        {
-            handColor.color = blackTone;
-        }
-        else if (index == 4)
-        {
-            handColor.color = arabTone;
-        }
-        else if (index == 5)
-        {
-            handColor.color = whiteTone;
-        }
-    }
+    //            // update avatar descriptions
+    //            avatarManager.ChangeCanvasScene1();
+    //            Debug.Log("Updated canvas in scene 1");
+    //        }
+    //    }
+    //}
 }

@@ -2032,7 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d5c402d6bf94289b0870a7f4dafb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 4047336405075951878}
   ScoreTable: {fileID: 0}
   t: {fileID: 0}
 --- !u!1 &7322047422917645994
