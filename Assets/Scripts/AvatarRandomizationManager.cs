@@ -70,6 +70,7 @@ public class AvatarRandomizationManager : MonoBehaviour
         if (avatars.Count > 0)
         {
             avatarInstance = Instantiate(avatars[opponentAvatarIndex], position, rotation);
+            DontDestroyOnLoad(avatarInstance);
         }
         else
         {
@@ -78,29 +79,6 @@ public class AvatarRandomizationManager : MonoBehaviour
 
 
         ChangeHandColor();
-        if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1")
-        {
-            //foreach (GameObject Char in avatars)
-            //{
-            //    if (Char.activeInHierarchy)
-            //    {
-            //        Char.SetActive(false);
-            //    }
-            //}
-            GetOpponentAvatar().SetActive(true);
-            ChangeCanvasScene2();
-        }
-        else
-        {
-            //foreach (GameObject Char in avatars)
-            //{
-            //    if (Char.activeInHierarchy)
-            //    {
-            //        Char.SetActive(false);
-            //    }
-            //}
-            ChangeCanvasScene1();
-        }
     }
 
     //void LoadPrefabsFromFolder()
@@ -149,29 +127,11 @@ public class AvatarRandomizationManager : MonoBehaviour
         if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
             currentScene = 2;
-            //foreach (GameObject Char in avatars)
-            //{
-            //    if (Char != GetOpponentAvatar() && Char.activeInHierarchy)
-            //    {
-            //        Char.SetActive(false);
-            //    }
-            //}
-            if (!GetOpponentAvatar().activeInHierarchy)
-            {
-                GetOpponentAvatar().SetActive(true);
-            }
             ChangeCanvasScene2();
 
         }
         else if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            //foreach (GameObject Char in avatars)
-            //{
-            //    if (Char.activeInHierarchy)
-            //    {
-            //        Char.SetActive(false);
-            //    }
-            //}
             currentScene = 1;
             ChangeCanvasScene1();
         }

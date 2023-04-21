@@ -7487,7 +7487,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54cff08bc6fa48f998402c06b29d30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatars: []
+  avatars:
+  - {fileID: 7380201604805934861, guid: ad7b8beba346e436c8fa2f3b7c4bd34a, type: 3}
+  - {fileID: 630269986577577174, guid: 148d74edf2d134c61b34a9ca8c92f901, type: 3}
+  - {fileID: 1314235600291573936, guid: 87b33b2cf8a554c63a4b52be51a8eba3, type: 3}
+  - {fileID: 7314122306333344198, guid: 129b986f7d7c04f038e1a211e172c9fe, type: 3}
+  - {fileID: 3462331942964612670, guid: 3567c3f47b9874ef9916530c89bcd2fc, type: 3}
+  - {fileID: 1317625545228173799, guid: 3fb12c7914efc4354b50969851f4e199, type: 3}
+  avatarInstance: {fileID: 0}
   avatarSprites:
   - {fileID: 21300000, guid: 4803c9fdf29a74bc2b664dd0003876a0, type: 3}
   - {fileID: 21300000, guid: c8a96127d669e48ce80639e1b1adcc7c, type: 3}
