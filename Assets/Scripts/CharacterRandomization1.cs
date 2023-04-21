@@ -42,7 +42,7 @@
 //    public void Start()
 //    {
 //        Debug.Log("Randomization script started");
-//        int x; 
+//        int x;
 //        int y;
 
 //        if (PlayerPrefs.HasKey("subjectIndex") && PlayerPrefs.HasKey("opponentIndex"))
@@ -80,7 +80,7 @@
 //        }
 //        else
 //        {
-            
+
 //            opponentAvatar.SetActive(true);
 //            ChangeProjectedCanvas2(opponentSprite, opponentIndex);
 //        }

@@ -16,7 +16,7 @@ public class OnButtonClick : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Button script started");
+        //Debug.Log("Button script started");
         currentButton.onClick.AddListener(CallDelayBot);
         popupPanel.SetActive(false);
 

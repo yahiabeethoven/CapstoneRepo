@@ -8,7 +8,7 @@ public class TestingTween : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination);
+        //Debug.Log(GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination);
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
             StartCoroutine(StartDelayed());

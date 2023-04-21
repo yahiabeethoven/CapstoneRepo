@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.IO;
+using UnityEditor;
+using System.Linq;
 
 public class AvatarRandomizationManager : MonoBehaviour
 {
@@ -24,14 +27,15 @@ public class AvatarRandomizationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        int avatarCount = avatars.Length;
-        subjectAvatarIndex = Random.Range(0, avatarCount);
-        subject = subjectAvatarIndex;
-        opponentAvatarIndex = Random.Range(0, avatarCount);
-        opponent = opponentAvatarIndex;
+        if (avatars.Count == 0)
+        {
+            LoadPrefabsFromFolder();
+        }
     }
 
-    public GameObject[] avatars;
+    //public GameObject[] avatars;
+    public List<GameObject> avatars = new List<GameObject>();
+    public GameObject avatarInstance;
     public Sprite[] avatarSprites;
 
     public int subjectAvatarIndex { get; private set; }
@@ -39,6 +43,8 @@ public class AvatarRandomizationManager : MonoBehaviour
     public int currentScene;
     public int subject;
     public int opponent;
+    public Vector3 position;
+    public Quaternion rotation;
 
     private TMPro.TMP_Text avatarRace;
     public Material handColor;
@@ -48,61 +54,108 @@ public class AvatarRandomizationManager : MonoBehaviour
     Color arabTone = new Color(179f / 255f, 97f / 255f, 35f / 255f);
     Color blackTone = new Color(102f / 255f, 71f / 255f, 46f / 255f);
 
-    //private void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
+    public string folderPath;
 
     public void Start()
     {
-        // Randomly select two avatars from the list
-        
+        int avatarCount = avatars.Count;
+        if (avatarCount > 0)
+        {
+            subjectAvatarIndex = Random.Range(0, avatarCount);
+            subject = subjectAvatarIndex;
+            opponentAvatarIndex = Random.Range(0, avatarCount);
+            opponent = opponentAvatarIndex;
+        }
+
+        if (avatars.Count > 0)
+        {
+            avatarInstance = Instantiate(avatars[opponentAvatarIndex], position, rotation);
+        }
+        else
+        {
+            Debug.LogWarning("No prefabs found in folder: " + folderPath);
+        }
+
+
         ChangeHandColor();
         if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
-            foreach (GameObject Char in avatars)
-            {
-                if (Char.activeInHierarchy)
-                {
-                    Char.SetActive(false);
-                }
-            }
+            //foreach (GameObject Char in avatars)
+            //{
+            //    if (Char.activeInHierarchy)
+            //    {
+            //        Char.SetActive(false);
+            //    }
+            //}
             GetOpponentAvatar().SetActive(true);
             ChangeCanvasScene2();
         }
         else
         {
-            foreach (GameObject Char in avatars)
-            {
-                if (Char.activeInHierarchy)
-                {
-                    Char.SetActive(false);
-                }
-            }
+            //foreach (GameObject Char in avatars)
+            //{
+            //    if (Char.activeInHierarchy)
+            //    {
+            //        Char.SetActive(false);
+            //    }
+            //}
             ChangeCanvasScene1();
         }
     }
+
+    //void LoadPrefabsFromFolder()
+    //{
+    //    string fullPath = Application.dataPath + "/" + folderPath;
+    //    string[] files = Directory.GetFiles(fullPath, "*.prefab");
+    //    foreach (string file in files)
+    //    {
+    //        string prefabPath = "Assets" + file.Replace(Application.dataPath, "").Replace("\\", "/");
+    //        GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
+    //        if (prefab != null)
+    //        {
+    //            avatars.Add(prefab);
+    //        }
+    //    }
+    //}
+    //void LoadPrefabsFromFolder()
+    //{
+    //    string folderPathRelativeToResources = folderPath.Replace("Assets/Resources/", "");
+    //    string[] prefabNames = Directory.GetFiles("Assets/Resources/" + folderPathRelativeToResources, "*.prefab")
+    //        .Select(path => Path.GetFileNameWithoutExtension(path))
+    //        .ToArray();
+
+    //    foreach (string prefabName in prefabNames)
+    //    {
+    //        GameObject prefab = Resources.Load<GameObject>(folderPathRelativeToResources + "/" + prefabName);
+    //        if (prefab != null)
+    //        {
+    //            avatars.Add(prefab);
+    //        }
+    //    }
+    //}
+    void LoadPrefabsFromFolder()
+    {
+        GameObject[] prefabs = Resources.LoadAll<GameObject>(folderPath);
+        foreach (GameObject prefab in prefabs)
+        {
+            avatars.Add(prefab);
+        }
+    }
+
+
 
     public void Update()
     {
         if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
             currentScene = 2;
-            foreach (GameObject Char in avatars)
-            {
-                if (Char != GetOpponentAvatar() && Char.activeInHierarchy)
-                {
-                    Char.SetActive(false);
-                }
-            }
+            //foreach (GameObject Char in avatars)
+            //{
+            //    if (Char != GetOpponentAvatar() && Char.activeInHierarchy)
+            //    {
+            //        Char.SetActive(false);
+            //    }
+            //}
             if (!GetOpponentAvatar().activeInHierarchy)
             {
                 GetOpponentAvatar().SetActive(true);
@@ -112,13 +165,13 @@ public class AvatarRandomizationManager : MonoBehaviour
         }
         else if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            foreach (GameObject Char in avatars)
-            {
-                if (Char.activeInHierarchy)
-                {
-                    Char.SetActive(false);
-                }
-            }
+            //foreach (GameObject Char in avatars)
+            //{
+            //    if (Char.activeInHierarchy)
+            //    {
+            //        Char.SetActive(false);
+            //    }
+            //}
             currentScene = 1;
             ChangeCanvasScene1();
         }
@@ -131,7 +184,8 @@ public class AvatarRandomizationManager : MonoBehaviour
 
     public GameObject GetOpponentAvatar()
     {
-        return avatars[opponentAvatarIndex];
+        //return avatars[opponentAvatarIndex];
+        return avatarInstance;
     }
 
     public void ChangeCanvasScene1()
@@ -224,4 +278,11 @@ public class AvatarRandomizationManager : MonoBehaviour
             handColor.color = whiteTone;
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        avatars.Clear();
+    }
 }
+
+
