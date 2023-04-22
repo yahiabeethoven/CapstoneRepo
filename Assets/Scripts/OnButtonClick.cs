@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class OnButtonClick : MonoBehaviour
 {
@@ -11,76 +10,79 @@ public class OnButtonClick : MonoBehaviour
     public GameObject currentCanvas;
     public GameObject popupPanel;
     public TMPro.TMP_Text popupText;
-
-    private GameObject opponentAvatar;
+    public GameObject opponentAvatar = null;
+    public AvatarRandomizationManager avatarRandomizationManager;
 
     private void Start()
     {
-        //Debug.Log("Button script started");
+        Debug.Log("Button script started");
         currentButton.onClick.AddListener(CallDelayBot);
         popupPanel.SetActive(false);
+        avatarRandomizationManager = AvatarRandomizationManager.Instance;
 
-        if (AvatarRandomizationManager.Instance != null && AvatarRandomizationManager.Instance.GetOpponentAvatar() != null)
-        {
-            opponentAvatar = AvatarRandomizationManager.Instance.GetOpponentAvatar();
-        }
+        opponentAvatar = avatarRandomizationManager.GetOpponentAvatar();
+    }
+    private void Update()
+    {
+        //if (GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar != null)
+        //{
+        //    opponentAvatar = GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar;
+        //}
+        //if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1" && opponentAvatar == null)
+        //{
+        //    opponentAvatar = avatarRandomizationManager.GetOpponentAvatar();
+        //}
+
     }
 
     public void CallDelayBot()
     {
-        //if (opponentAvatar == null && AvatarRandomizationManager.Instance != null && AvatarRandomizationManager.Instance.GetOpponentAvatar() != null)
-        //{
-        //    opponentAvatar = AvatarRandomizationManager.Instance.GetOpponentAvatar();
-        //}
-
-        opponentAvatar = AvatarRandomizationManager.Instance.GetOpponentAvatar();
-
-        if (currentButton != null && otherButton != null && (currentButton.tag == "CooperateButton" || currentButton.tag == "DefectButton"))
+        if (opponentAvatar == null)
+        {
+            opponentAvatar = avatarRandomizationManager.GetOpponentAvatar();
+            Debug.Log(opponentAvatar);
+        }
+        if (currentButton.tag == "CooperateButton" || currentButton.tag == "DefectButton")
         {
             currentButton.interactable = false;
             otherButton.interactable = false;
             if (currentButton.tag == "CooperateButton")
             {
-                opponentAvatar.GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 0);
+                opponentAvatar.GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton,  0);
             }
             else
             {
-                opponentAvatar.GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton, otherButton, 1);
+                opponentAvatar.GetComponent<AvatarButtonAnimationManager>().DelayAnimation(currentButton,  1);
             }
         }
-        else if (currentButton != null && currentButton.tag == "ContinueButton")
+        else if (currentButton.tag == "ContinueButton")
         {
             Debug.Log("Continue Button has been clicked");
             StartCoroutine(MenuDelayed());
             return;
         }
     }
-
     public void CloseMenu()
     {
-        Destroy(currentCanvas);
+        DestroyImmediate(currentCanvas, true);
         Debug.Log("canvas destroyed");
     }
-
     IEnumerator MenuDelayed()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         CloseMenu();
     }
-
     public void ShowPopup(string message)
     {
-        if (popupText != null)
-        {
-            popupText.text = message;
-            popupPanel.SetActive(true);
-            StartCoroutine(HidePopupAfterDelay());
-        }
+        popupText.text = message;
+        popupPanel.SetActive(true);
+        StartCoroutine(HidePopupAfterDelay());
     }
-
     IEnumerator HidePopupAfterDelay()
     {
         yield return new WaitForSeconds(3.2f); // change the delay time as needed
         popupPanel.SetActive(false);
+        currentButton.interactable = true;
+        otherButton.interactable = true;
     }
 }

@@ -145,7 +145,16 @@ public class AvatarRandomizationManager : MonoBehaviour
     public GameObject GetOpponentAvatar()
     {
         //return avatars[opponentAvatarIndex];
-        return avatarInstance;
+        if (avatarInstance != null)
+        {
+            return avatarInstance;
+        }
+        else
+        {
+            Debug.Log("OpponentAvatar still not instantiated");
+            return null;
+        }
+        
     }
 
     public void ChangeCanvasScene1()

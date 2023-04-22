@@ -10,11 +10,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public Animator animator;
     public GameObject ScoreTable;
     private Button thisButton;
-    private Button diffButton;
 
     private int buttonIndex;
-    private int prevButtonIndex = -1;           // this is the simulated player's way of keeping track of the subject's last move to copy it (tit for tat)
-    private readonly int firstMove = -1;
+    private int prevButtonIndex = 0;           // this is the simulated player's way of keeping track of the subject's last move to copy it (tit for tat)
     private readonly int cooperateIndex = 0;
     private readonly int defectIndex = 1;
 
@@ -43,10 +41,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.SetBool("ButtonPush", false);
-        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1")
-        {
-            ScoreTable = GameObject.Find("ScoreTable");
-        }
+        
 
         //csvFilePath = Application.dataPath + "/Data/test.csv";
         //print(Application.dataPath);
@@ -73,16 +68,11 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     }
     private void Update()
     {
-        //if (animator.GetBool("ButtonPush") == true)
-        //{
-        //    Debug.Log("Currently pushing button !!!!!!!!!!!!!!!!!!!!!");
-        //}
-        //if (animator.GetBool("ButtonPush") != true)
-        //{
-        //    animator.SetBool("ButtonPush", true);
-        //}
-        
-        
+
+        if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1" && !ScoreTable)
+        {
+            ScoreTable = GameObject.Find("ScoreTable");
+        }
     }
 
     public void UpdateCSV(int roundNumber, int subjectChoice, int computerChoice)
@@ -97,9 +87,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         writer.Close();
     }
 
-    public void DelayAnimation(Button button, Button other, int bIndex)
+    public void DelayAnimation(Button button,  int bIndex)
     {
-        diffButton = other;
         thisButton = button;
         buttonIndex = bIndex;
         Debug.Log("Delay started");
@@ -107,23 +96,6 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
-            
-            if (currentRound == 10)
-            {
-                if (currentPhase == 10)
-                {
-                    Debug.Log("All Rounds are done!");
-                }
-                else
-                {
-                    currentPhase++;
-                    currentRound = 1;
-                }
-            }
-            else
-            {
-                currentRound++;
-            }
             //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
         
@@ -141,22 +113,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         animator.SetBool("ButtonPush", true);
         yield return new WaitForSeconds(1.8f);
 
-        if (prevButtonIndex == firstMove) // first move, push button 0
-        {
-            if (buttonIndex == cooperateIndex)
-            {
-                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, mutualCooperate, mutualCooperate);
-                prevButtonIndex = cooperateIndex;
-                currentOutcome = bothCoop;
-            }
-            else
-            {
-                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleDefect, singleCooperate);
-                prevButtonIndex = defectIndex;
-                currentOutcome = firstDefect;
-            }    
-        }
-        else if (prevButtonIndex == cooperateIndex) // if opponent pushed button 0 last time, push button 0 this time
+        if (prevButtonIndex == cooperateIndex) // if opponent pushed button 0 last time, push button 0 this time
         {
             if (buttonIndex == cooperateIndex)
             {
@@ -165,8 +122,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             }
             else
             {
-                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleDefect, singleCooperate);
                 prevButtonIndex = defectIndex;
+                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleDefect, singleCooperate);
                 currentOutcome = firstDefect;
             }
         }
@@ -174,8 +131,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         {
             if (buttonIndex == cooperateIndex)
             {
-                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleCooperate, singleDefect);
                 prevButtonIndex = cooperateIndex;
+                ScoreTable.GetComponent<TestScore>().ChangeScore(currentPhase, singleCooperate, singleDefect);
                 currentOutcome = secondDefect;
             }
             else
@@ -190,19 +147,19 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (currentOutcome == bothCoop)
         {
-            updateMsg = "You: " + mutualCooperate.ToString() + "\nOpponent: " + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
+            updateMsg = "Mini-Round: "+currentRound+"\nYou: " + mutualCooperate.ToString() + "\nOpponent: " + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
         }
         else if (currentOutcome == firstDefect)
         {
-            updateMsg = "You: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated";
+            updateMsg = "Mini-Round: " + currentRound + "\nYou: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated";
         }
         else if (currentOutcome == secondDefect)
         {
-            updateMsg = "You: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected";
+            updateMsg = "Mini-Round: " + currentRound + "\nYou: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected";
         }
         else if (currentOutcome == bothDefect)
         {
-            updateMsg = "You: " + mutualDefect.ToString() + "\nOpponent: " + mutualDefect.ToString() + "\n\nOutcome: you both defected";
+            updateMsg = "Mini-Round: " + currentRound + "\nYou: " + mutualDefect.ToString() + "\nOpponent: " + mutualDefect.ToString() + "\n\nOutcome: you both defected";
         }
 
         if (currentRound == 10)
@@ -211,8 +168,19 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         }
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
         animator.SetBool("ButtonPush", false);
-        thisButton.interactable = true;
-        diffButton.interactable = true;
 
+        if (currentRound == 10 && currentPhase == 10)
+        {
+            Debug.Log("All Rounds are done!");
+        }
+        else if (currentRound == 10)
+        {
+            currentPhase++;
+            currentRound = 1;
+        }
+        else
+        {
+            currentRound++;
+        }
     }
 }
