@@ -34,26 +34,27 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private string csvFilePath;
     private string updateMsg;
     private StringBuilder csvContent = new StringBuilder();
-
-
     public Text t;
+    public AvatarRandomizationManager avatarRandomizationManager;
+
+
     public void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetBool("ButtonPush", false);
-        
 
-        //csvFilePath = Application.dataPath + "/Data/test.csv";
-        //print(Application.dataPath);
+        avatarRandomizationManager = AvatarRandomizationManager.Instance;
+        csvFilePath = Application.dataPath + "/Data/test.csv";
         //if (t != null)
         //    t.text = Application.dataPath;
         //csvFilePath = "Assets/scores.csv";
+        print(csvFilePath);
         //// create or open CSV file
 
-        //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
-        //csvContent.Append("Round Number,Subject Choice,Computer Choice\n"); // add column headers
-        //writer.Write(csvContent); // write the headers to the CSV file
-        //writer.Close(); // close the file
+        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
+        csvContent.Append("Subject ID, Opponent ID, Phase Number, Round Number,Subject Choice,Opponent Choice\n"); // add column headers
+        writer.Write(csvContent); // write the headers to the CSV file
+        writer.Close(); // close the file
         //System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
 
         /*
@@ -75,14 +76,22 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         }
     }
 
-    public void UpdateCSV(int roundNumber, int subjectChoice, int computerChoice)
+    public void UpdateCSV(int subject, int opponent, int phase, int roundNumber, int subjectChoice, int computerChoice)
     {
-        csvContent.Clear();
+        //csvContent.Clear();
+        //// add the round number, subject choice, and computer choice to the CSV content
+        //csvContent.Append(subject.ToString() +","+ opponent.ToString() + "," + phase.ToString() + "," + roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
+
+        //// write the updated CSV content to the file
+        //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to false to overwrite the file
+        //writer.Write(csvContent);
+        //writer.Close();
+
         // add the round number, subject choice, and computer choice to the CSV content
-        csvContent.Append(roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
+        csvContent.Append(subject.ToString() + "," + opponent.ToString() + "," + phase.ToString() + "," + roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
 
         // write the updated CSV content to the file
-        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to false to overwrite the file
+        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
         writer.Write(csvContent);
         writer.Close();
     }
@@ -96,9 +105,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
+            UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
             //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
-        
+
     }
 
     IEnumerator DelayBotAction(int delay)
@@ -168,6 +178,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         }
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
         animator.SetBool("ButtonPush", false);
+
+        //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
 
         if (currentRound == 10 && currentPhase == 10)
         {
