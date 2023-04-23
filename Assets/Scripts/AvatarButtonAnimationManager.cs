@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+//using CsvHelper;
 using System.IO;
+//using CsvHelper.Configuration;
+using System.Globalization;
+using System;
+//using CsvHelper;
+//using static UnityEditor.PlayerSettings;
 
 public class AvatarButtonAnimationManager : MonoBehaviour
 {
@@ -37,6 +43,81 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     public Text t;
     public AvatarRandomizationManager avatarRandomizationManager;
 
+    public class MyData
+    {
+        public int SubjectId { get; set; }
+        public int OpponentId { get; set; }
+        public int Phase { get; set; }
+        public int RoundNumber { get; set; }
+        public int SubjectChoice { get; set; }
+        public int OpponentChoice { get; set; }
+    }
+
+
+    //public void WriteToCsvFile(string filePath, IEnumerable<MyData> data)
+    //{
+    //    // Configure the CSV writer.
+    //    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+    //    {
+    //        HasHeaderRecord = true, // Include a header row in the CSV file.
+    //        Delimiter = ",", // Use a comma as the field delimiter.
+    //    };
+
+    //    // Open the output file.
+    //    using (var writer = new StreamWriter(filePath))
+    //    {
+    //        // Create the CSV writer.
+    //        using (var csv = new CsvWriter(writer, config))
+    //        {
+    //            // Write the data to the CSV file.
+    //            csv.WriteRecords(data);
+    //        }
+    //    }
+    //}
+
+    //public void WriteToCsvFile(string filePath, MyData data)
+    //{
+    //    var exists = File.Exists(filePath);
+    //    using (var writer = new StreamWriter(filePath, true))
+    //    using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //    {
+    //        if (!exists)
+    //        {
+    //            csv.WriteHeader<MyData>();
+    //            csv.NextRecord();
+    //        }
+    //        csv.WriteRecord(data);
+    //        csv.NextRecord();
+    //        try
+    //        {
+    //            writer.Flush();
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            // Handle the error here, e.g. log the error or retry writing.
+    //            Console.WriteLine($"Error writing to CSV file: {ex.Message}");
+    //        }
+    //    }
+    //}
+    //public static void WriteToCsvFile(string filePath, MyData data)
+    //{
+    //    using (var streamWriter = new StreamWriter(filePath, true))
+    //    using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
+    //    {
+    //        csv.Configuration.Delimiter = ",";
+    //        csv.Configuration.HasHeaderRecord = !File.Exists(filePath);
+
+    //        if (csv.Configuration.HasHeaderRecord)
+    //        {
+    //            csv.WriteHeader<MyData>();
+    //            csv.NextRecord();
+    //        }
+
+    //        csv.WriteRecord(data);
+    //        csv.NextRecord();
+    //        streamWriter.Flush();
+    //    }
+    //}
 
     public void Start()
     {
@@ -44,18 +125,36 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         animator.SetBool("ButtonPush", false);
 
         avatarRandomizationManager = AvatarRandomizationManager.Instance;
-        csvFilePath = Application.dataPath + "/Data/test.csv";
+
+        var externalStoragePath = "";
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // Get the path to the external storage directory
+            AndroidJavaClass environmentClass = new AndroidJavaClass("android.os.Environment");
+            externalStoragePath = environmentClass.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
+        }
+
+        // Create a new directory for your app's files
+        var appDirectoryPath = Path.Combine(externalStoragePath, "MyAppDirectory");
+        Directory.CreateDirectory(appDirectoryPath);
+
+        // Write the data to a CSV file in the app directory
+        csvFilePath = Path.Combine(appDirectoryPath, "myData.csv");
+
+        //csvFilePath = Application.dataPath + "/Data/test.csv";
         //if (t != null)
         //    t.text = Application.dataPath;
         //csvFilePath = "Assets/scores.csv";
         print(csvFilePath);
         //// create or open CSV file
 
-        StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
-        csvContent.Append("Subject ID, Opponent ID, Phase Number, Round Number,Subject Choice,Opponent Choice\n"); // add column headers
-        writer.Write(csvContent); // write the headers to the CSV file
-        writer.Close(); // close the file
+        //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
+        //csvContent.Append("Subject ID, Opponent ID, Phase Number, Round Number,Subject Choice,Opponent Choice\n"); // add column headers
+        //writer.Write(csvContent); // write the headers to the CSV file
+        //writer.Close(); // close the file
         //System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
+
 
         /*
         "Round Number,Subject Choice,Computer Choice\n"
@@ -67,6 +166,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
          */
     }
+
     private void Update()
     {
 
@@ -101,11 +201,21 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton = button;
         buttonIndex = bIndex;
         Debug.Log("Delay started");
-        int z = Random.Range(0, 3);
+        int z = UnityEngine.Random.Range(0, 3);
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
-            UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
+            var myData = new MyData
+            {
+                SubjectId = avatarRandomizationManager.subjectAvatarIndex,
+                OpponentId = avatarRandomizationManager.opponentAvatarIndex,
+                Phase = currentPhase,
+                RoundNumber = currentRound,
+                SubjectChoice = buttonIndex,
+                OpponentChoice = prevButtonIndex
+            };
+            //WriteToCsvFile(csvFilePath, myData);
+            //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
             //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
 
