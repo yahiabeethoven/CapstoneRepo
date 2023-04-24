@@ -8,6 +8,10 @@ using System.IO;
 //using CsvHelper.Configuration;
 using System.Globalization;
 using System;
+using System.Linq;
+using TMPro;
+using UnityEngine.Android;
+
 //using CsvHelper;
 //using static UnityEditor.PlayerSettings;
 
@@ -39,9 +43,14 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     //private string csvFilePath = "Assets/scores.csv";
     private string csvFilePath;
     private string updateMsg;
+
+    public TMPro.TMP_Text testMsg;
+    public TMPro.TMP_Text testMsg2;
+
     private StringBuilder csvContent = new StringBuilder();
     public Text t;
     public AvatarRandomizationManager avatarRandomizationManager;
+    
 
     public class MyData
     {
@@ -53,8 +62,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         public int OpponentChoice { get; set; }
     }
 
+    public MyData myData;
 
-    //public void WriteToCsvFile(string filePath, IEnumerable<MyData> data)
+
+    //public void WriteToCsvFile(string filePath, MyData data)
     //{
     //    // Configure the CSV writer.
     //    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -70,10 +81,33 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     //        using (var csv = new CsvWriter(writer, config))
     //        {
     //            // Write the data to the CSV file.
-    //            csv.WriteRecords(data);
+    //            csv.WriteRecord(data);
     //        }
     //    }
     //}
+    public void WriteToCsvFile(string filePath, MyData data)
+    {
+        // Check if the file already exists.
+        bool fileExists = File.Exists(filePath);
+
+        // Open the output file for appending.
+        using (var writer = new StreamWriter(filePath, true))
+        {
+            // Write the header only if the file doesn't exist yet.
+            if (!fileExists)
+            {
+                var header = string.Join(",", typeof(MyData).GetProperties().Select(p => p.Name));
+                writer.WriteLine(header);
+            }
+
+            // Write the data to the CSV file.
+            var values = string.Join(",", typeof(MyData).GetProperties().Select(p => p.GetValue(data)));
+            writer.WriteLine(values);
+
+        }
+    }
+
+
 
     //public void WriteToCsvFile(string filePath, MyData data)
     //{
@@ -126,21 +160,48 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         avatarRandomizationManager = AvatarRandomizationManager.Instance;
 
-        var externalStoragePath = "";
+        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+        {
+            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+        }
+
+        //var externalStoragePath = "";
+
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+        //    // Get the path to the external storage directory
+        //    AndroidJavaClass environmentClass = new AndroidJavaClass("android.os.Environment");
+        //    externalStoragePath = environmentClass.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
+        //}
+
+        //// Create a new directory for your app's files
+        //var appDirectoryPath = Path.Combine(externalStoragePath, "MyAppDirectory");
+        //Directory.CreateDirectory(appDirectoryPath);
+
+        //// Write the data to a CSV file in the app directory
+        //csvFilePath = Path.Combine(appDirectoryPath, "myData.csv");
 
         if (Application.platform == RuntimePlatform.Android)
         {
             // Get the path to the external storage directory
-            AndroidJavaClass environmentClass = new AndroidJavaClass("android.os.Environment");
-            externalStoragePath = environmentClass.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
+            string externalStoragePath = "/storage/self/primary";
+            string folderName = "CapstoneFiles";
+            string csvFileName = "test.csv";
+
+            // Create the folder if it doesn't exist
+            string folderPath = Path.Combine(externalStoragePath, folderName);
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            // Create the CSV file if it doesn't exist
+            csvFilePath = Path.Combine(folderPath, csvFileName);
+            if (!File.Exists(csvFilePath))
+            {
+                File.Create(csvFilePath).Close();
+            }
         }
-
-        // Create a new directory for your app's files
-        var appDirectoryPath = Path.Combine(externalStoragePath, "MyAppDirectory");
-        Directory.CreateDirectory(appDirectoryPath);
-
-        // Write the data to a CSV file in the app directory
-        csvFilePath = Path.Combine(appDirectoryPath, "myData.csv");
 
         //csvFilePath = Application.dataPath + "/Data/test.csv";
         //if (t != null)
@@ -173,7 +234,17 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1" && !ScoreTable)
         {
             ScoreTable = GameObject.Find("ScoreTable");
+            testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
+            testMsg2 = GameObject.Find("OpponentDescription").GetComponent<TMP_Text>();
+            testMsg.text = "current path: " + csvFilePath;
+            if (myData != null)
+            {
+                testMsg2.text = myData.ToString();
+            }
+            
         }
+
+        
     }
 
     public void UpdateCSV(int subject, int opponent, int phase, int roundNumber, int subjectChoice, int computerChoice)
@@ -205,7 +276,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
-            var myData = new MyData
+            myData = new MyData
             {
                 SubjectId = avatarRandomizationManager.subjectAvatarIndex,
                 OpponentId = avatarRandomizationManager.opponentAvatarIndex,
@@ -214,7 +285,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
                 SubjectChoice = buttonIndex,
                 OpponentChoice = prevButtonIndex
             };
-            //WriteToCsvFile(csvFilePath, myData);
+            WriteToCsvFile(csvFilePath, myData);
             //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
             //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
@@ -267,7 +338,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (currentOutcome == bothCoop)
         {
-            updateMsg = "Mini-Round: "+currentRound+"\nYou: " + mutualCooperate.ToString() + "\nOpponent: " + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
+            //updateMsg = "Mini-Round: "+currentRound+"\nYou: " + mutualCooperate.ToString() + "\nOpponent: " + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
+            updateMsg = myData.SubjectId.ToString()+","+ myData.OpponentId.ToString() + "," + myData.Phase.ToString() + "," + myData.RoundNumber.ToString() + "," + myData.SubjectChoice.ToString() + "," + myData.OpponentChoice.ToString();
         }
         else if (currentOutcome == firstDefect)
         {

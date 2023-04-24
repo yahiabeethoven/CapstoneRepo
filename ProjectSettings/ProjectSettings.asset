@@ -197,6 +197,9 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1263642040990395322, guid: 3bb61aa982839434897f319ea685815a, type: 2}
   - {fileID: 11400000, guid: a4e40b70531485f47974879026685b23, type: 2}
   - {fileID: 0}
@@ -780,7 +783,8 @@ PlayerSettings:
   gcIncremental: 1
   assemblyVersionValidation: 1
   gcWBarrierValidation: 0
-  apiCompatibilityLevelPerPlatform: {}
+  apiCompatibilityLevelPerPlatform:
+    Android: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Template_3D
