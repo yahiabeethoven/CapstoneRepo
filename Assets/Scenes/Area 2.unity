@@ -1073,22 +1073,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  rowObject: {fileID: 0}
-  lightGreen:
-    r: 0.56
-    g: 0.93
-    b: 0.56
-    a: 1
-  lightBlue:
-    r: 0.678
-    g: 0.847
-    b: 0.902
-    a: 1
-  lightGrey:
-    r: 0.75
-    g: 0.75
-    b: 0.75
-    a: 1
 --- !u!1 &69646426
 GameObject:
   m_ObjectHideFlags: 0
@@ -4146,7 +4130,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -141.75, y: -127}
-  m_SizeDelta: {x: 500, y: 100}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &753382739
 MonoBehaviour:
@@ -4168,30 +4152,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You and your partner have been arrested for a crime you both committed
-    together. You have been separated and placed in different rooms. The police have
-    offered each of you a deal: if you confess and your partner remains silent, you
-    will be set free and your partner will receive a long prison sentence. If you
-    both confess, you will each receive a moderate sentence. If neither of you confesses,
-    you will both receive a light sentence.
+  m_text: 'This VR experiment involves playing a prisoner''s dilemma game with another
+    player. Use your right-hand controller''s index finger button to make your decision.
 
 
-    You and your partner will play
-    a game to determine your sentences. The game consists of 10 rounds, and each
-    round has 10 mini-rounds. In each mini-round, you will simultaneously choose
-    whether to confess or remain silent. Your partner will not know your choice,
-    and you will not know your partner''s choice. At the end of each round, the police
-    will use your choices to determine your sentences.
-
-
-    You should make your
-    choices based on what you think is best for yourself. Your partner will be making
-    their choices based on what they think is best for themselves. Keep in mind that
-    the outcomes of the game are cumulative, so your decisions in each round will
-    affect your overall sentence.
-
-
-    "May the odds ever be in your favor"'
+    If
+    both of you choose to cooperate, you both gain 3 points. If you choose to defect
+    while your opponent cooperates, you gain 5 points while your opponent loses 1.
+    The opposite scenario applies as well. If both of you choose to defect, you both
+    receive 0 points. The objective is to accumulate as many points as possible across
+    multiple rounds by choosing to cooperate or defect.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -4218,12 +4188,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 22.5
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 15
-  m_fontSizeMax: 36
+  m_fontSizeMax: 30
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6986,27 +6956,6 @@ MonoBehaviour:
   handColor: {fileID: 0}
   subjectIndex: 0
   opponentIndex: 0
-  avatarRace: {fileID: 0}
-  whiteTone:
-    r: 1
-    g: 0.8862745
-    b: 0.7490196
-    a: 1
-  asianTone:
-    r: 1
-    g: 0.8392157
-    b: 0.7058824
-    a: 1
-  arabTone:
-    r: 0.7019608
-    g: 0.38039216
-    b: 0.13725491
-    a: 1
-  blackTone:
-    r: 0.4
-    g: 0.2784314
-    b: 0.18039216
-    a: 1
 --- !u!4 &1398811066
 Transform:
   m_ObjectHideFlags: 0
@@ -7388,35 +7337,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 14a10925ce17743f192494e2369c6531, type: 3}
   - {fileID: 21300000, guid: 77a8026ce9c314a20b34d2b1f4b13f69, type: 3}
   - {fileID: 21300000, guid: c58145bbeb65a409499a058d305158b6, type: 3}
-  <subjectAvatarIndex>k__BackingField: 0
-  <opponentAvatarIndex>k__BackingField: 0
   currentScene: 0
   subject: 0
   opponent: 0
   position: {x: 4.212, y: -0.06, z: 1.75}
   rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  avatarRace: {fileID: 0}
   handColor: {fileID: 2100000, guid: 99786a2b0732c4bb7bd08374c5e87333, type: 2}
-  whiteTone:
-    r: 1
-    g: 0.8862745
-    b: 0.7490196
-    a: 1
-  asianTone:
-    r: 1
-    g: 0.8392157
-    b: 0.7058824
-    a: 1
-  arabTone:
-    r: 0.7019608
-    g: 0.38039216
-    b: 0.13725491
-    a: 1
-  blackTone:
-    r: 0.4
-    g: 0.2784314
-    b: 0.18039216
-    a: 1
   folderPath: Characters/Animated Prefabs
 --- !u!4 &1467101520
 Transform:

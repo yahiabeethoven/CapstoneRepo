@@ -40,6 +40,8 @@ public class AvatarRandomizationManager : MonoBehaviour
 
     public int subjectAvatarIndex { get; private set; }
     public int opponentAvatarIndex { get; private set; }
+    public string subjectAvatarRace { get; private set; }
+    public string opponentAvatarRace { get; private set; }
     public int currentScene;
     public int subject;
     public int opponent;
@@ -113,11 +115,12 @@ public class AvatarRandomizationManager : MonoBehaviour
     //}
     void LoadPrefabsFromFolder()
     {
-        GameObject[] prefabs = Resources.LoadAll<GameObject>(folderPath);
-        foreach (GameObject prefab in prefabs)
-        {
-            avatars.Add(prefab);
-        }
+        //GameObject[] prefabs = Resources.LoadAll<GameObject>(folderPath);
+        //foreach (GameObject prefab in prefabs)
+        //{
+        //    avatars.Add(prefab);
+        //}
+        avatars.AddRange(Resources.LoadAll<GameObject>(folderPath));
     }
 
 
@@ -145,16 +148,16 @@ public class AvatarRandomizationManager : MonoBehaviour
     public GameObject GetOpponentAvatar()
     {
         //return avatars[opponentAvatarIndex];
-        if (avatarInstance != null)
-        {
-            return avatarInstance;
-        }
-        else
-        {
-            Debug.Log("OpponentAvatar still not instantiated");
-            return null;
-        }
-        
+        //if (avatarInstance != null)
+        //{
+        //    return avatarInstance;
+        //}
+        //else
+        //{
+        //    Debug.Log("OpponentAvatar still not instantiated");
+        //    return null;
+        //}
+        return avatarInstance;
     }
 
     public void ChangeCanvasScene1()
@@ -165,26 +168,32 @@ public class AvatarRandomizationManager : MonoBehaviour
         if (subjectAvatarIndex == 0)
         {
             avatarRace.text = "YOU:\nRacial Background: White\nGender: Female";
+            subjectAvatarRace = "White_Female";
         }
         else if (subjectAvatarIndex == 1)
         {
             avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Female";
+            subjectAvatarRace = "Arab_Female";
         }
         else if (subjectAvatarIndex == 2)
         {
             avatarRace.text = "YOU:\nRacial Background: Asian\nGender: Female";
+            subjectAvatarRace = "Asian_Female";
         }
         else if (subjectAvatarIndex == 3)
         {
             avatarRace.text = "YOU:\nRacial Background: Black\nGender: Male";
+            subjectAvatarRace = "Black_Male";
         }
         else if (subjectAvatarIndex == 4)
         {
             avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Male";
+            subjectAvatarRace = "Arab_Male";
         }
         else if (subjectAvatarIndex == 5)
         {
             avatarRace.text = "YOU:\nRacial Background: White\nGender: Male";
+            subjectAvatarRace = "White_Male";
         }
     }
 
@@ -197,26 +206,32 @@ public class AvatarRandomizationManager : MonoBehaviour
         if (opponentAvatarIndex == 0)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Female";
+            opponentAvatarRace = "White_Female";
         }
         else if (opponentAvatarIndex == 1)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Female";
+            opponentAvatarRace = "Arab_Female";
         }
         else if (opponentAvatarIndex == 2)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: Asian\nGender: Female";
+            opponentAvatarRace = "Asian_Female";
         }
         else if (opponentAvatarIndex == 3)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: Black\nGender: Male";
+            opponentAvatarRace = "Black_Male";
         }
         else if (opponentAvatarIndex == 4)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Male";
+            opponentAvatarRace = "Arab_Male";
         }
         else if (opponentAvatarIndex == 5)
         {
             avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Male";
+            opponentAvatarRace = "White_Male";
         }
     }
 
