@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-//using CsvHelper;
 using System.IO;
-//using CsvHelper.Configuration;
 using System.Globalization;
 using System;
 using System.Linq;
 using TMPro;
 using UnityEngine.Android;
-//using Firebase;
-//using Firebase.Database;
-//using Firebase.Unity.Editor;
 
-//using CsvHelper;
-//using static UnityEditor.PlayerSettings;
 
 public class AvatarButtonAnimationManager : MonoBehaviour
 {
@@ -43,16 +36,12 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int currentPhase = 1;
     private int currentRound = 1;
 
-    //private string csvFilePath = "Assets/scores.csv";
     private string csvFilePath;
     private string updateMsg;
-    //DatabaseReference reference;
 
     public TMPro.TMP_Text testMsg;
-    public TMPro.TMP_Text testMsg2;
 
     private StringBuilder csvContent = new StringBuilder();
-    public Text t;
     public AvatarRandomizationManager avatarRandomizationManager;
     
 
@@ -68,27 +57,6 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
     public MyData myData;
 
-
-    //public void WriteToCsvFile(string filePath, MyData data)
-    //{
-    //    // Configure the CSV writer.
-    //    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-    //    {
-    //        HasHeaderRecord = true, // Include a header row in the CSV file.
-    //        Delimiter = ",", // Use a comma as the field delimiter.
-    //    };
-
-    //    // Open the output file.
-    //    using (var writer = new StreamWriter(filePath))
-    //    {
-    //        // Create the CSV writer.
-    //        using (var csv = new CsvWriter(writer, config))
-    //        {
-    //            // Write the data to the CSV file.
-    //            csv.WriteRecord(data);
-    //        }
-    //    }
-    //}
     public void WriteToCsvFile(string filePath, MyData data)
     {
         // Check if the file already exists.
@@ -111,52 +79,6 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         }
     }
 
-
-
-    //public void WriteToCsvFile(string filePath, MyData data)
-    //{
-    //    var exists = File.Exists(filePath);
-    //    using (var writer = new StreamWriter(filePath, true))
-    //    using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-    //    {
-    //        if (!exists)
-    //        {
-    //            csv.WriteHeader<MyData>();
-    //            csv.NextRecord();
-    //        }
-    //        csv.WriteRecord(data);
-    //        csv.NextRecord();
-    //        try
-    //        {
-    //            writer.Flush();
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            // Handle the error here, e.g. log the error or retry writing.
-    //            Console.WriteLine($"Error writing to CSV file: {ex.Message}");
-    //        }
-    //    }
-    //}
-    //public static void WriteToCsvFile(string filePath, MyData data)
-    //{
-    //    using (var streamWriter = new StreamWriter(filePath, true))
-    //    using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture))
-    //    {
-    //        csv.Configuration.Delimiter = ",";
-    //        csv.Configuration.HasHeaderRecord = !File.Exists(filePath);
-
-    //        if (csv.Configuration.HasHeaderRecord)
-    //        {
-    //            csv.WriteHeader<MyData>();
-    //            csv.NextRecord();
-    //        }
-
-    //        csv.WriteRecord(data);
-    //        csv.NextRecord();
-    //        streamWriter.Flush();
-    //    }
-    //}
-
     public void Start()
     {
         animator = GetComponent<Animator>();
@@ -164,78 +86,17 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         avatarRandomizationManager = AvatarRandomizationManager.Instance;
 
-        //FirebaseDatabase.GetInstance("https://capstone-project-database-default-rtdb.firebaseio.com/");
-        //FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://capstone-project-database-default-rtdb.firebaseio.com/");
-        //reference = FirebaseDatabase.DefaultInstance.RootReference;
-
-
         if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
         {
             Permission.RequestUserPermission(Permission.ExternalStorageWrite);
         }
 
-        //var externalStoragePath = "";
-
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
-        //    // Get the path to the external storage directory
-        //    AndroidJavaClass environmentClass = new AndroidJavaClass("android.os.Environment");
-        //    externalStoragePath = environmentClass.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath");
-        //}
-
-        //// Create a new directory for your app's files
-        //var appDirectoryPath = Path.Combine(externalStoragePath, "MyAppDirectory");
-        //Directory.CreateDirectory(appDirectoryPath);
-
-        //// Write the data to a CSV file in the app directory
-        //csvFilePath = Path.Combine(appDirectoryPath, "myData.csv");
-
         if (Application.platform == RuntimePlatform.Android)
         {
-            // Get the path to the external storage directory
-            //string externalStoragePath = "/storage/self/primary";
-            //string folderName = "CapstoneFiles";
-            //string csvFileName = "test.csv";
-
-            //// Create the folder if it doesn't exist
-            //string folderPath = Path.Combine(externalStoragePath, folderName);
-            //if (!Directory.Exists(folderPath))
-            //{
-            //    Directory.CreateDirectory(folderPath);
-            //}
-
-            //// Create the CSV file if it doesn't exist
-            //csvFilePath = Path.Combine(folderPath, csvFileName);
-            //if (!File.Exists(csvFilePath))
-            //{
-            //    File.Create(csvFilePath).Close();
-            //}
             csvFilePath = Application.persistentDataPath + "/_test.csv";
         }
 
-
-        //if (t != null)
-        //    t.text = Application.dataPath;
-        //csvFilePath = "Assets/scores.csv";
         print(csvFilePath);
-        //// create or open CSV file
-
-        //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
-        //csvContent.Append("Subject ID, Opponent ID, Phase Number, Round Number,Subject Choice,Opponent Choice\n"); // add column headers
-        //writer.Write(csvContent); // write the headers to the CSV file
-        //writer.Close(); // close the file
-        //System.IO.File.WriteAllText(Application.dataPath + "/DataForExport.txt", csvContent.ToString());
-
-
-        /*
-        "Round Number,Subject Choice,Computer Choice\n"
-        "2, cooperate, not cooperate"
-
-
-
-
-
-         */
     }
 
     private void Update()
@@ -245,37 +106,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         {
             ScoreTable = GameObject.Find("ScoreTable");
             testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
-            //testMsg2 = GameObject.Find("OpponentDescription").GetComponent<TMP_Text>();
             testMsg.text = "current path: " + csvFilePath;
-            //if (myData != null)
-            //{
-            //    testMsg2.text = myData.ToString();
-            //}
-            
-        }
-
-        
+        }  
     }
-
-    //public void UpdateCSV(int subject, int opponent, int phase, int roundNumber, int subjectChoice, int computerChoice)
-    //{
-    //    //csvContent.Clear();
-    //    //// add the round number, subject choice, and computer choice to the CSV content
-    //    //csvContent.Append(subject.ToString() +","+ opponent.ToString() + "," + phase.ToString() + "," + roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
-
-    //    //// write the updated CSV content to the file
-    //    //StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to false to overwrite the file
-    //    //writer.Write(csvContent);
-    //    //writer.Close();
-
-    //    // add the round number, subject choice, and computer choice to the CSV content
-    //    csvContent.Append(subject.ToString() + "," + opponent.ToString() + "," + phase.ToString() + "," + roundNumber.ToString() + "," + subjectChoice.ToString() + "," + computerChoice.ToString() + "\n");
-
-    //    // write the updated CSV content to the file
-    //    StreamWriter writer = new StreamWriter(csvFilePath, true); // set the second parameter to true to append to the file
-    //    writer.Write(csvContent);
-    //    writer.Close();
-    //}
 
     public void DelayAnimation(Button button,  int bIndex)
     {
@@ -295,13 +128,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
                 SubjectChoice = buttonIndex,
                 OpponentChoice = prevButtonIndex
             };
-            //string key = reference.Child("mydata").Push().Key;
-            //reference.Child("mydata").Child(key).SetValueAsync(myData);
-            WriteToCsvFile(csvFilePath, myData);
-            //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
-            //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
-        }
 
+            WriteToCsvFile(csvFilePath, myData);
+        }
     }
 
     IEnumerator DelayBotAction(int delay)
@@ -373,14 +202,12 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
         animator.SetBool("ButtonPush", false);
 
-        //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
-
         if (currentRound == 10 && currentPhase == 5)
         {
             Debug.Log("All Rounds are done!");
             updateMsg = "Thank you very much for participating in this experiment!\n\nPlease take off the headset and notify your lab assistant that you are done!";
             thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
-            ScoreTable.SetActive(false);
+            //ScoreTable.SetActive(false);
         }
         else if (currentRound == 10)
         {

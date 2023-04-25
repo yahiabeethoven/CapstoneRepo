@@ -22,18 +22,6 @@ public class OnButtonClick : MonoBehaviour
 
         opponentAvatar = avatarRandomizationManager.GetOpponentAvatar();
     }
-    private void Update()
-    {
-        //if (GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar != null)
-        //{
-        //    opponentAvatar = GameObject.Find("Characters").GetComponent<CharacterRandomization>().opponentAvatar;
-        //}
-        //if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1" && opponentAvatar == null)
-        //{
-        //    opponentAvatar = avatarRandomizationManager.GetOpponentAvatar();
-        //}
-
-    }
 
     public void CallDelayBot()
     {

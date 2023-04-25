@@ -42,7 +42,6 @@ public class AvatarRandomizationManager : MonoBehaviour
     public int opponentAvatarIndex { get; private set; }
     public string subjectAvatarRace { get; private set; }
     public string opponentAvatarRace { get; private set; }
-    public int currentScene;
     public int subject;
     public int opponent;
     public Vector3 position;
@@ -83,59 +82,22 @@ public class AvatarRandomizationManager : MonoBehaviour
         ChangeHandColor();
     }
 
-    //void LoadPrefabsFromFolder()
-    //{
-    //    string fullPath = Application.dataPath + "/" + folderPath;
-    //    string[] files = Directory.GetFiles(fullPath, "*.prefab");
-    //    foreach (string file in files)
-    //    {
-    //        string prefabPath = "Assets" + file.Replace(Application.dataPath, "").Replace("\\", "/");
-    //        GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
-    //        if (prefab != null)
-    //        {
-    //            avatars.Add(prefab);
-    //        }
-    //    }
-    //}
-    //void LoadPrefabsFromFolder()
-    //{
-    //    string folderPathRelativeToResources = folderPath.Replace("Assets/Resources/", "");
-    //    string[] prefabNames = Directory.GetFiles("Assets/Resources/" + folderPathRelativeToResources, "*.prefab")
-    //        .Select(path => Path.GetFileNameWithoutExtension(path))
-    //        .ToArray();
 
-    //    foreach (string prefabName in prefabNames)
-    //    {
-    //        GameObject prefab = Resources.Load<GameObject>(folderPathRelativeToResources + "/" + prefabName);
-    //        if (prefab != null)
-    //        {
-    //            avatars.Add(prefab);
-    //        }
-    //    }
-    //}
     void LoadPrefabsFromFolder()
     {
-        //GameObject[] prefabs = Resources.LoadAll<GameObject>(folderPath);
-        //foreach (GameObject prefab in prefabs)
-        //{
-        //    avatars.Add(prefab);
-        //}
         avatars.AddRange(Resources.LoadAll<GameObject>(folderPath));
     }
-
-
 
     public void Update()
     {
         if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 1")
         {
-            currentScene = 2;
             ChangeCanvasScene2();
+            ChangeCanvasScene1();
 
         }
         else if (GameObject.Find("Transporter").GetComponent<TransporterController>().destination == "Area 2")
         {
-            currentScene = 1;
             ChangeCanvasScene1();
         }
     }
@@ -147,16 +109,6 @@ public class AvatarRandomizationManager : MonoBehaviour
 
     public GameObject GetOpponentAvatar()
     {
-        //return avatars[opponentAvatarIndex];
-        //if (avatarInstance != null)
-        //{
-        //    return avatarInstance;
-        //}
-        //else
-        //{
-        //    Debug.Log("OpponentAvatar still not instantiated");
-        //    return null;
-        //}
         return avatarInstance;
     }
 
@@ -167,32 +119,32 @@ public class AvatarRandomizationManager : MonoBehaviour
 
         if (subjectAvatarIndex == 0)
         {
-            avatarRace.text = "YOU:\nRacial Background: White\nGender: Female";
+            avatarRace.text = "You:\nMary Olson";
             subjectAvatarRace = "White_Female";
         }
         else if (subjectAvatarIndex == 1)
         {
-            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Female";
+            avatarRace.text = "You:\nAisha Khalil";
             subjectAvatarRace = "Arab_Female";
         }
         else if (subjectAvatarIndex == 2)
         {
-            avatarRace.text = "YOU:\nRacial Background: Asian\nGender: Female";
+            avatarRace.text = "You:\nWei Li";
             subjectAvatarRace = "Asian_Female";
         }
         else if (subjectAvatarIndex == 3)
         {
-            avatarRace.text = "YOU:\nRacial Background: Black\nGender: Male";
+            avatarRace.text = "You:\nDarnell Jackson";
             subjectAvatarRace = "Black_Male";
         }
         else if (subjectAvatarIndex == 4)
         {
-            avatarRace.text = "YOU:\nRacial Background: Arab\nGender: Male";
+            avatarRace.text = "You:\nAbd al-Hakiim Amar";
             subjectAvatarRace = "Arab_Male";
         }
         else if (subjectAvatarIndex == 5)
         {
-            avatarRace.text = "YOU:\nRacial Background: White\nGender: Male";
+            avatarRace.text = "You:\nThomas Wagner";
             subjectAvatarRace = "White_Male";
         }
     }
@@ -205,32 +157,32 @@ public class AvatarRandomizationManager : MonoBehaviour
 
         if (opponentAvatarIndex == 0)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Female";
+            avatarRace.text = "Opponent:\nMary Olson";
             opponentAvatarRace = "White_Female";
         }
         else if (opponentAvatarIndex == 1)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Female";
+            avatarRace.text = "Opponent:\nAisha Khalil";
             opponentAvatarRace = "Arab_Female";
         }
         else if (opponentAvatarIndex == 2)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: Asian\nGender: Female";
+            avatarRace.text = "Opponent:\nWei Li";
             opponentAvatarRace = "Asian_Female";
         }
         else if (opponentAvatarIndex == 3)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: Black\nGender: Male";
+            avatarRace.text = "Opponent:\nDarnell Jackson";
             opponentAvatarRace = "Black_Male";
         }
         else if (opponentAvatarIndex == 4)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: Arab\nGender: Male";
+            avatarRace.text = "Opponent:\nAbd al-Hakiim Amar";
             opponentAvatarRace = "Arab_Male";
         }
         else if (opponentAvatarIndex == 5)
         {
-            avatarRace.text = "OPPONENT:\nRacial Background: White\nGender: Male";
+            avatarRace.text = "Opponent:\nThomas Wagner";
             opponentAvatarRace = "White_Male";
         }
     }
