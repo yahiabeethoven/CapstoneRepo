@@ -89,27 +89,27 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     //        }
     //    }
     //}
-    //public void WriteToCsvFile(string filePath, MyData data)
-    //{
-    //    // Check if the file already exists.
-    //    bool fileExists = File.Exists(filePath);
+    public void WriteToCsvFile(string filePath, MyData data)
+    {
+        // Check if the file already exists.
+        bool fileExists = File.Exists(filePath);
 
-    //    // Open the output file for appending.
-    //    using (var writer = new StreamWriter(filePath, true))
-    //    {
-    //        // Write the header only if the file doesn't exist yet.
-    //        if (!fileExists)
-    //        {
-    //            var header = string.Join(",", typeof(MyData).GetProperties().Select(p => p.Name));
-    //            writer.WriteLine(header);
-    //        }
+        // Open the output file for appending.
+        using (var writer = new StreamWriter(filePath, true))
+        {
+            // Write the header only if the file doesn't exist yet.
+            if (!fileExists)
+            {
+                var header = string.Join(",", typeof(MyData).GetProperties().Select(p => p.Name));
+                writer.WriteLine(header);
+            }
 
-    //        // Write the data to the CSV file.
-    //        var values = string.Join(",", typeof(MyData).GetProperties().Select(p => p.GetValue(data)));
-    //        writer.WriteLine(values);
+            // Write the data to the CSV file.
+            var values = string.Join(",", typeof(MyData).GetProperties().Select(p => p.GetValue(data)));
+            writer.WriteLine(values);
 
-    //    }
-    //}
+        }
+    }
 
 
 
@@ -169,10 +169,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         //reference = FirebaseDatabase.DefaultInstance.RootReference;
 
 
-        //if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
-        //{
-        //    Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-        //}
+        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+        {
+            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+        }
 
         //var externalStoragePath = "";
 
@@ -190,28 +190,28 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         //// Write the data to a CSV file in the app directory
         //csvFilePath = Path.Combine(appDirectoryPath, "myData.csv");
 
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
-        //    // Get the path to the external storage directory
-        //    //string externalStoragePath = "/storage/self/primary";
-        //    //string folderName = "CapstoneFiles";
-        //    //string csvFileName = "test.csv";
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // Get the path to the external storage directory
+            //string externalStoragePath = "/storage/self/primary";
+            //string folderName = "CapstoneFiles";
+            //string csvFileName = "test.csv";
 
-        //    //// Create the folder if it doesn't exist
-        //    //string folderPath = Path.Combine(externalStoragePath, folderName);
-        //    //if (!Directory.Exists(folderPath))
-        //    //{
-        //    //    Directory.CreateDirectory(folderPath);
-        //    //}
+            //// Create the folder if it doesn't exist
+            //string folderPath = Path.Combine(externalStoragePath, folderName);
+            //if (!Directory.Exists(folderPath))
+            //{
+            //    Directory.CreateDirectory(folderPath);
+            //}
 
-        //    //// Create the CSV file if it doesn't exist
-        //    //csvFilePath = Path.Combine(folderPath, csvFileName);
-        //    //if (!File.Exists(csvFilePath))
-        //    //{
-        //    //    File.Create(csvFilePath).Close();
-        //    //}
-        //    csvFilePath = Application.dataPath + "/Data/test.csv";
-        //}
+            //// Create the CSV file if it doesn't exist
+            //csvFilePath = Path.Combine(folderPath, csvFileName);
+            //if (!File.Exists(csvFilePath))
+            //{
+            //    File.Create(csvFilePath).Close();
+            //}
+            csvFilePath = Application.persistentDataPath + "/_test.csv";
+        }
 
 
         //if (t != null)
@@ -244,9 +244,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1" && !ScoreTable)
         {
             ScoreTable = GameObject.Find("ScoreTable");
-            //testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
+            testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
             //testMsg2 = GameObject.Find("OpponentDescription").GetComponent<TMP_Text>();
-            //testMsg.text = "current path: " + csvFilePath;
+            testMsg.text = "current path: " + csvFilePath;
             //if (myData != null)
             //{
             //    testMsg2.text = myData.ToString();
@@ -297,7 +297,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             };
             //string key = reference.Child("mydata").Push().Key;
             //reference.Child("mydata").Child(key).SetValueAsync(myData);
-            //WriteToCsvFile(csvFilePath, myData);
+            WriteToCsvFile(csvFilePath, myData);
             //UpdateCSV(avatarRandomizationManager.subjectAvatarIndex, avatarRandomizationManager.opponentAvatarIndex, currentPhase, currentRound, buttonIndex, prevButtonIndex);
             //UpdateCSV(currentRound, buttonIndex, prevButtonIndex);
         }
