@@ -51,6 +51,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
     public class MyData
     {
+        public string ParticipantId { get; set; }
         public string SubjectId { get; set; }
         public string OpponentId { get; set; }
         public int Phase { get; set; }
@@ -101,7 +102,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            csvFilePath = Application.persistentDataPath + "/_test2.csv";
+            csvFilePath = Application.persistentDataPath + "/_test3.csv";
         }
 
         print(csvFilePath);
@@ -113,8 +114,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Transporter").GetComponent<TransporterController>().destination == "Area 1" && !ScoreTable)
         {
             ScoreTable = GameObject.Find("ScoreTable");
-            testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
-            testMsg.text = "current path: " + csvFilePath;
+            //testMsg = GameObject.Find("Instructions").GetComponent<TMP_Text>();
+            //testMsg.text = "current path: " + csvFilePath;
         }  
     }
 
@@ -136,6 +137,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
             myData = new MyData
             {
+                ParticipantId = DateTime.Now.ToString("yyyyMMddHHmmssfff"),
                 SubjectId = avatarRandomizationManager.subjectAvatarRace,
                 OpponentId = avatarRandomizationManager.opponentAvatarRace,
                 Phase = currentPhase,
@@ -156,6 +158,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         StartCoroutine(RunButtonPushingAnimation());
+        if (thisButton.GetComponent<OnButtonClick>().popupPanel.activeInHierarchy)
+        {
+            thisButton.GetComponent<OnButtonClick>().popupPanel.SetActive(false);
+        }
     }
 
 
@@ -198,20 +204,20 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (currentOutcome == bothCoop)
         {
-            //updateMsg = "Mini-Round: "+currentRound+"\nYou: +" + mutualCooperate.ToString() + "\nOpponent: +" + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
-            updateMsg = myData.SubjectId.ToString()+","+ myData.OpponentId.ToString() + "," + myData.Phase.ToString() + "," + myData.RoundNumber.ToString() + "," + myData.SubjectChoice.ToString() + "," + myData.OpponentChoice.ToString();
+            updateMsg = "Mini-Round: " + currentRound+"\n\nYou: +" + mutualCooperate.ToString() + "\nOpponent: +" + mutualCooperate.ToString() + "\n\nOutcome: you both cooperated";
+            //updateMsg = myData.SubjectId.ToString()+","+ myData.OpponentId.ToString() + "," + myData.Phase.ToString() + "," + myData.RoundNumber.ToString() + "," + myData.SubjectChoice.ToString() + "," + myData.OpponentChoice.ToString();
         }
         else if (currentOutcome == firstDefect)
         {
-            updateMsg = "Mini-Round: " + currentRound + "\nYou: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated";
+            updateMsg = "Mini-Round: " + currentRound + "\n\nYou: +" + singleDefect.ToString() + "\nOpponent: " + singleCooperate.ToString() + "\n\nOutcome: you defected, the opponent cooperated";
         }
         else if (currentOutcome == secondDefect)
         {
-            updateMsg = "Mini-Round: " + currentRound + "\nYou: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected";
+            updateMsg = "Mini-Round: " + currentRound + "\n\nYou: " + singleCooperate.ToString() + "\nOpponent: +" + singleDefect.ToString() + "\n\nOutcome: you cooperated, the opponent defected";
         }
         else if (currentOutcome == bothDefect)
         {
-            updateMsg = "Mini-Round: " + currentRound + "\nYou: +" + mutualDefect.ToString() + "\nOpponent: +" + mutualDefect.ToString() + "\n\nOutcome: you both defected";
+            updateMsg = "Mini-Round: " + currentRound + "\n\nYou: +" + mutualDefect.ToString() + "\nOpponent: +" + mutualDefect.ToString() + "\n\nOutcome: you both defected";
         }
 
         if (currentRound == 10)
@@ -221,7 +227,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg, gameEnded);
         animator.SetBool("ButtonPush", false);
 
-        if (currentRound == 10 && currentPhase == 5)
+        if (currentRound == 2 && currentPhase == 1)
         {
             Debug.Log("All Rounds are done!");
             updateMsg = "Thank you very much for participating in this experiment!\n\nPlease take off the headset and notify your lab assistant that you are done!";
@@ -229,7 +235,8 @@ public class AvatarButtonAnimationManager : MonoBehaviour
             thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg, gameEnded);
 
             thisButton.gameObject.SetActive(false);
-            thisButton.gameObject.SetActive(false);
+            thisButton.GetComponent<OnButtonClick>().otherButton.gameObject.SetActive(false);
+            
             //ScoreTable.SetActive(false);
         }
         else if (currentRound == 10)

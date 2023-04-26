@@ -69,12 +69,13 @@ public class OnButtonClick : MonoBehaviour
     IEnumerator HidePopupAfterDelay(bool gameEnd)
     {
         yield return new WaitForSeconds(3.2f); // change the delay time as needed
-        popupPanel.SetActive(false);
+        
         if (!gameEnd)
         {
             currentButton.interactable = true;
             otherButton.interactable = true;
         }
-        
+        popupPanel.SetActive(false);
+
     }
 }

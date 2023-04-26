@@ -29,6 +29,7 @@ public class Area1Controller : XRSceneController
         }
 
         return xrRigOrigin;
+        //return null;
 
     }
 }

@@ -13,7 +13,7 @@ public class XRSceneTransitionManager : MonoBehaviour
     public string initialScene;
     public bool isLoading { get; private set; } = false;
 
-    Scene xrScene;
+    public Scene xrScene;
     Scene currentScene;
     float currentFade = 0.0f;
 
@@ -31,7 +31,9 @@ public class XRSceneTransitionManager : MonoBehaviour
             return;
         }
 
-        xrScene = SceneManager.GetActiveScene();
+        //xrScene = SceneManager.GetActiveScene();
+        xrScene = SceneManager.GetSceneByName("XR");
+        Debug.Log(xrScene.name);
         SceneManager.sceneLoaded += OnNewSceneAdded;
 
         if(!Application.isEditor)
@@ -88,31 +90,36 @@ public class XRSceneTransitionManager : MonoBehaviour
         GameObject[] xrObjects = xrScene.GetRootGameObjects();
         GameObject[] newSceneObjects = newScene.GetRootGameObjects();
 
-        GameObject xrRig = xrObjects.First((obj) => { return obj.CompareTag("XRRig"); });
-        //GameObject xrRigOrigin = newSceneObjects.First((obj) => { return obj.CompareTag("XRRigOrigin"); });
-        GameObject sceneControllerObj = newSceneObjects.First((obj) => { return obj.CompareTag("XRSceneController"); });
-
-        XRSceneController sceneController = sceneControllerObj.GetComponent<XRSceneController>();
-
-        if (sceneController)
+        //GameObject xrRig = xrObjects.First((obj) => { return obj.CompareTag("XRRig"); });
+        GameObject xrRig = null;
+        if (xrObjects.Any((obj) => obj.CompareTag("XRRig")))
         {
-            sceneController.Init();
+            xrRig = xrObjects.First((obj) => obj.CompareTag("XRRig"));
 
-            Transform xrRigOrigin = sceneController.GetXRRigOrigin();
-            
+            Debug.Log(xrObjects);
+            //GameObject xrRigOrigin = newSceneObjects.First((obj) => { return obj.CompareTag("XRRigOrigin"); });
+            GameObject sceneControllerObj = newSceneObjects.First((obj) => { return obj.CompareTag("XRSceneController"); });
 
-            if (xrRig && xrRigOrigin)
+            XRSceneController sceneController = sceneControllerObj.GetComponent<XRSceneController>();
+
+            if (sceneController)
             {
-                Debug.Log("both rigs are valid!");
-                xrRig.transform.position = xrRigOrigin.position;
-                xrRig.transform.rotation = xrRigOrigin.rotation;
-            }
-            Debug.Log(xrRig.transform.position);
-            Debug.Log(xrRig.transform.rotation);
-            Debug.Log("XR Rig set!!");
-        }
+                sceneController.Init();
 
-        
+                Transform xrRigOrigin = sceneController.GetXRRigOrigin();
+
+
+                if (xrRig && xrRigOrigin)
+                {
+                    xrRig.transform.position = xrRigOrigin.position;
+                    xrRig.transform.rotation = xrRigOrigin.rotation;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No game object found with tag XRRig");
+        }
     }
 
     IEnumerator Fade(float dst)
