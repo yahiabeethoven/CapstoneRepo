@@ -39,6 +39,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private string csvFilePath;
     private string updateMsg;
 
+    //string subRoundTemp, oppRoundTemp, subTotalTemp, oppTotalTemp;
+    int subRoundInt, oppRoundInt, subTotalInt, oppTotalInt;
+    bool gameEnded = false;
+
     public TMPro.TMP_Text testMsg;
 
     private StringBuilder csvContent = new StringBuilder();
@@ -53,6 +57,10 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         public int RoundNumber { get; set; }
         public int SubjectChoice { get; set; }
         public int OpponentChoice { get; set; }
+        public int SubjectRoundScore { get; set; }
+        public int OpponentRoundScore { get; set; }
+        public int SubjectTotalScore { get; set; }
+        public int OpponentTotalScore { get; set; }
     }
 
     public MyData myData;
@@ -93,7 +101,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            csvFilePath = Application.persistentDataPath + "/_test.csv";
+            csvFilePath = Application.persistentDataPath + "/_test2.csv";
         }
 
         print(csvFilePath);
@@ -116,9 +124,16 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         buttonIndex = bIndex;
         Debug.Log("Delay started");
         int z = UnityEngine.Random.Range(0, 3);
+
         if (animator.GetBool("ButtonPush") != true)
         {
             StartCoroutine(DelayBotAction(z));
+
+            bool success1 = int.TryParse(ScoreTable.GetComponent<TestScore>().subjectScore.text, out subRoundInt);
+            bool success2 = int.TryParse(ScoreTable.GetComponent<TestScore>().computerScore.text, out oppRoundInt);
+            bool success3 = int.TryParse(ScoreTable.GetComponent<TestScore>().subjectTotal.text, out subTotalInt);
+            bool success4 = int.TryParse(ScoreTable.GetComponent<TestScore>().computerTotal.text, out oppTotalInt);
+
             myData = new MyData
             {
                 SubjectId = avatarRandomizationManager.subjectAvatarRace,
@@ -126,7 +141,11 @@ public class AvatarButtonAnimationManager : MonoBehaviour
                 Phase = currentPhase,
                 RoundNumber = currentRound,
                 SubjectChoice = buttonIndex,
-                OpponentChoice = prevButtonIndex
+                OpponentChoice = prevButtonIndex,
+                SubjectRoundScore = subRoundInt,
+                OpponentRoundScore = oppRoundInt,
+                SubjectTotalScore = subTotalInt,
+                OpponentTotalScore = oppTotalInt
             };
 
             WriteToCsvFile(csvFilePath, myData);
@@ -199,14 +218,18 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         {
             updateMsg += "\n\nRound "+currentPhase.ToString()+" completed!";
         }
-        thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
+        thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg, gameEnded);
         animator.SetBool("ButtonPush", false);
 
         if (currentRound == 10 && currentPhase == 5)
         {
             Debug.Log("All Rounds are done!");
             updateMsg = "Thank you very much for participating in this experiment!\n\nPlease take off the headset and notify your lab assistant that you are done!";
-            thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg);
+            gameEnded = true;
+            thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg, gameEnded);
+
+            thisButton.gameObject.SetActive(false);
+            thisButton.gameObject.SetActive(false);
             //ScoreTable.SetActive(false);
         }
         else if (currentRound == 10)

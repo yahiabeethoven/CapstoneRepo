@@ -60,17 +60,21 @@ public class OnButtonClick : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CloseMenu();
     }
-    public void ShowPopup(string message)
+    public void ShowPopup(string message, bool gameEnd)
     {
         popupText.text = message;
         popupPanel.SetActive(true);
-        StartCoroutine(HidePopupAfterDelay());
+        StartCoroutine(HidePopupAfterDelay(gameEnd));
     }
-    IEnumerator HidePopupAfterDelay()
+    IEnumerator HidePopupAfterDelay(bool gameEnd)
     {
         yield return new WaitForSeconds(3.2f); // change the delay time as needed
         popupPanel.SetActive(false);
-        currentButton.interactable = true;
-        otherButton.interactable = true;
+        if (!gameEnd)
+        {
+            currentButton.interactable = true;
+            otherButton.interactable = true;
+        }
+        
     }
 }
