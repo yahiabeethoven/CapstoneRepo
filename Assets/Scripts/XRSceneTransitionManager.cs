@@ -99,12 +99,17 @@ public class XRSceneTransitionManager : MonoBehaviour
             sceneController.Init();
 
             Transform xrRigOrigin = sceneController.GetXRRigOrigin();
+            
 
             if (xrRig && xrRigOrigin)
             {
+                Debug.Log("both rigs are valid!");
                 xrRig.transform.position = xrRigOrigin.position;
                 xrRig.transform.rotation = xrRigOrigin.rotation;
             }
+            Debug.Log(xrRig.transform.position);
+            Debug.Log(xrRig.transform.rotation);
+            Debug.Log("XR Rig set!!");
         }
 
         

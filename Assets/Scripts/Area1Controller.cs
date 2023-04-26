@@ -27,7 +27,8 @@ public class Area1Controller : XRSceneController
         {
             return PlayerManager.Instance.hasVisitedArea2 ? xrRigOrigin2 : xrRigOrigin;
         }
-        return null;
-        
+
+        return xrRigOrigin;
+
     }
 }
