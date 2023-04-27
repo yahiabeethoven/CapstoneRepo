@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.IO;
 using UnityEditor;
 using System.Linq;
+using System;
+using System.Xml;
 
 public class AvatarRandomizationManager : MonoBehaviour
 {
@@ -62,11 +64,11 @@ public class AvatarRandomizationManager : MonoBehaviour
         int avatarCount = avatars.Count;
         if (avatarCount > 0)
         {
-            subjectAvatarIndex = Random.Range(0, avatarCount);
+            subjectAvatarIndex = UnityEngine.Random.Range(0, avatarCount);
             subject = subjectAvatarIndex;
-            opponentAvatarIndex = Random.Range(0, avatarCount);
+            opponentAvatarIndex = UnityEngine.Random.Range(0, avatarCount);
             opponent = opponentAvatarIndex;
-        }
+         }
 
         if (avatars.Count > 0)
         {

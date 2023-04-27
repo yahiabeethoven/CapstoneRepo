@@ -12,9 +12,13 @@ public class OnButtonClick : MonoBehaviour
     public TMPro.TMP_Text popupText;
     public GameObject opponentAvatar = null;
     public AvatarRandomizationManager avatarRandomizationManager;
+    public Button coopButt;
+    public Button defButt;
 
     private void Start()
     {
+        coopButt.interactable = false;
+        defButt.interactable = false;
         Debug.Log("Button script started");
         currentButton.onClick.AddListener(CallDelayBot);
         popupPanel.SetActive(false);
@@ -47,6 +51,8 @@ public class OnButtonClick : MonoBehaviour
         {
             Debug.Log("Continue Button has been clicked");
             StartCoroutine(MenuDelayed());
+            coopButt.interactable = true;
+            defButt.interactable = true;
             return;
         }
     }
@@ -65,17 +71,21 @@ public class OnButtonClick : MonoBehaviour
         popupText.text = message;
         popupPanel.SetActive(true);
         StartCoroutine(HidePopupAfterDelay(gameEnd));
+        //if (gameEnd)
+        //{
+        //    popupPanel.SetActive(false);
+        //}
     }
     IEnumerator HidePopupAfterDelay(bool gameEnd)
     {
         yield return new WaitForSeconds(3.2f); // change the delay time as needed
-        
+        popupPanel.SetActive(false);
         if (!gameEnd)
         {
             currentButton.interactable = true;
             otherButton.interactable = true;
         }
-        popupPanel.SetActive(false);
+        
 
     }
 }

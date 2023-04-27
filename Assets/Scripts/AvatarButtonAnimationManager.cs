@@ -32,6 +32,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
     private int secondDefect = 2;
     private int bothDefect = 3;
     private int currentOutcome = -1;
+    private string uniqueId;
 
     private int currentPhase = 1;
     private int currentRound = 1;
@@ -93,6 +94,9 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("ButtonPush", false);
 
+        uniqueId = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+
+
         avatarRandomizationManager = AvatarRandomizationManager.Instance;
 
         if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
@@ -102,7 +106,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            csvFilePath = Application.persistentDataPath + "/_test3.csv";
+            csvFilePath = Application.persistentDataPath + "/_experiment.csv";
         }
 
         print(csvFilePath);
@@ -137,7 +141,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
             myData = new MyData
             {
-                ParticipantId = DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+                ParticipantId = uniqueId,
                 SubjectId = avatarRandomizationManager.subjectAvatarRace,
                 OpponentId = avatarRandomizationManager.opponentAvatarRace,
                 Phase = currentPhase,
@@ -227,7 +231,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
         thisButton.GetComponent<OnButtonClick>().ShowPopup(updateMsg, gameEnded);
         animator.SetBool("ButtonPush", false);
 
-        if (currentRound == 2 && currentPhase == 1)
+        if (currentRound == 10 && currentPhase == 5)
         {
             Debug.Log("All Rounds are done!");
             updateMsg = "Thank you very much for participating in this experiment!\n\nPlease take off the headset and notify your lab assistant that you are done!";
@@ -236,7 +240,7 @@ public class AvatarButtonAnimationManager : MonoBehaviour
 
             thisButton.gameObject.SetActive(false);
             thisButton.GetComponent<OnButtonClick>().otherButton.gameObject.SetActive(false);
-            
+            GameObject.Find("CanvasPopup").SetActive(false);
             //ScoreTable.SetActive(false);
         }
         else if (currentRound == 10)
