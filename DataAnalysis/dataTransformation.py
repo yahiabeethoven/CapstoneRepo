@@ -3,6 +3,10 @@ import re
 import openpyxl
 from openpyxl.styles import PatternFill
 from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.utils import get_column_letter
+from openpyxl.styles import Alignment
+import statsmodels.formula.api as smf
+
 
 NUM_ROUNDS = 10
 
@@ -19,19 +23,19 @@ df[['OpponentRace', 'OpponentGender']] = df['OpponentId'].str.split('_', expand=
 
 # create a new DataFrame to hold the transformed data
 new_df = pd.DataFrame(columns=[
-    'Participant ID', 
-    'Phase Number', 
-    'Subject Self Identified Race', 
-    'Subject Self Identified Gender',
-    'Subject Assigned Race',
-    'Subject Assigned Gender',
-    'Opponent Assigned Race', 
-    'Opponent Assigned Gender', 
-    'Subject Round Score', 
-    'Opponent Round Score',
-    'Subject Total Score', 
-    'Opponent Total Score', 
-    'Cooperation Percentage',
+    'ParticipantID', 
+    'PhaseNumber', 
+    'SubjectSelfRace', 
+    'SubjectSelfGender',
+    'SubjectAvatarRace',
+    'SubjectAvatarGender',
+    'OpponentAvatarRace', 
+    'OpponentAvatarGender', 
+    'SubjectRoundScore', 
+    'OpponentRoundScore',
+    'SubjectTotalScore', 
+    'OpponentTotalScore', 
+    'CooperationPercentage',
 ])
 
 # loop through each participant and phase
@@ -49,7 +53,7 @@ for (pid, ph), subset in grouped:
     cooperation_count = (subset['SubjectChoice'] == 0).sum()
         
     # calculate the percentage of times the subject cooperated
-    cooperation_percentage = cooperation_count / NUM_ROUNDS
+    cooperation_percentage = cooperation_count / float(NUM_ROUNDS)
         
     # get the subject's self-race and self-gender
     subject_self_race = subset['SubjectSelfRace'].iloc[0]
@@ -67,19 +71,19 @@ for (pid, ph), subset in grouped:
 
     # add a new row to the transformed DataFrame
     new_row = pd.DataFrame({
-        'Participant ID': [pid],
-        'Phase Number': [ph],
-        'Subject Self Identified Race': [subject_self_race],
-        'Subject Self Identified Gender': [subject_self_gender],
-        'Subject Assigned Race': [subject_race],
-        'Subject Assigned Gender': [subject_gender],
-        'Opponent Assigned Race': [opponent_race],
-        'Opponent Assigned Gender': [opponent_gender],
-        'Subject Round Score': [subject_round_score],
-        'Opponent Round Score': [opponent_round_score],
-        'Subject Total Score': [subject_score],
-        'Opponent Total Score': [opponent_score],
-        'Cooperation Percentage': [cooperation_percentage],
+        'ParticipantID': [pid],
+        'PhaseNumber': [ph],
+        'SubjectSelfRace': [subject_self_race],
+        'SubjectSelfGender': [subject_self_gender],
+        'SubjectAvatarRace': [subject_race],
+        'SubjectAvatarGender': [subject_gender],
+        'OpponentAvatarRace': [opponent_race],
+        'OpponentAvatarGender': [opponent_gender],
+        'SubjectRoundScore': [subject_round_score],
+        'OpponentRoundScore': [opponent_round_score],
+        'SubjectTotalScore': [subject_score],
+        'OpponentTotalScore': [opponent_score],
+        'CooperationPercentage': [cooperation_percentage],
     })
     new_df = pd.merge(new_df, new_row, how='outer')
 
@@ -118,10 +122,20 @@ for column in worksheet.columns:
     max_length = 0
     column_letter = column[0].column_letter
     for cell in column:
+        cell.alignment = Alignment(horizontal='center')
         if len(str(cell.value)) > max_length:
             max_length = len(str(cell.value))
     adjusted_width = (max_length + 2)
     worksheet.column_dimensions[column_letter].width = adjusted_width
+
+# fit a regression model
+model = smf.ols(formula='CooperationPercentage ~ C(SubjectSelfRace == OpponentAvatarRace) + C(SubjectAvatarRace == OpponentAvatarRace) + C(SubjectSelfGender == OpponentAvatarGender) + C(SubjectAvatarGender == OpponentAvatarGender) + ParticipantID', data=new_df)
+results = model.fit()
+
+# save the results to a file
+with open('results.txt', 'w') as f:
+    f.write(results.summary().as_text())
+
 
 workbook.save('transformed_data_styled.xlsx')
 
